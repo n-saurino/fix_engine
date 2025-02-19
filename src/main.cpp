@@ -1,16 +1,24 @@
-#include <stdio.h>
-#include <iostream>
-#include <boost/version.hpp>
+#include "Server.hpp"
+#include "Client.hpp"
+#include <chrono>
+#include <thread>
+
+void RunServer(){
+    Server server{};
+}
+
+void RunClient(){
+    Client client{};
+}
 
 int main(int, char**){
+    std::thread server_thread{RunServer};
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 
-   std::cout << "Boost version: " 
-              << BOOST_VERSION / 100000 << "."  // Major version
-              << BOOST_VERSION / 100 % 1000 << "."  // Minor version
-              << BOOST_VERSION % 100  // Patch level
-              << std::endl;
- 
+    std::thread client_thread{RunClient};
+    client_thread.join();
+    
+    server_thread.join();
 
-    int x = 42;
-    printf("Hello, from main! x is %d.\n", x);
+    return 0;
 }
