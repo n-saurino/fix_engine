@@ -1,4 +1,5 @@
 #pragma once
+#include "FIXNetworkHandler.hpp"
 
 class FIXEngine
 {
@@ -7,6 +8,7 @@ public:
     ~FIXEngine();
 
 private:
+    FIXNetworkHandler network_handler{};
     /* data */
 };
 

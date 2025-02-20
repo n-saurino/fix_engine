@@ -25,7 +25,8 @@ endif()
 
 find_package(GTest REQUIRED)
 
-add_executable(main src/main.cpp src/Server.cpp src/Client.cpp)
+add_executable(main src/main.cpp src/Server.cpp src/Client.cpp src/FIXEngine.cpp
+               src/FIXNetworkHandler.cpp src/FIXMessageParser.cpp)
 
 # Include Boost headers
 target_include_directories(main PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include")

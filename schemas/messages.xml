@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<messageSchema xmlns="http://fixprotocol.io/2017/sbe"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xi="http://www.w3.org/2001/XInclude"
+               package="examples"
+               id="91"
+               version="0"
+               byteOrder="littleEndian"
+               xsi:schemaLocation="http://fixprotocol.io/2017/sbe ../xsd/sbe-2.0rc3.xsd">
+
+    <types>
+        <composite name="messageHeader">
+            <type name="blockLength" primitiveType="uint16"/>
+            <type name="templateId" primitiveType="uint16"/>
+            <type name="schemaId" primitiveType="uint16"/>
+            <type name="version" primitiveType="uint16"/>
+        </composite>
+    </types>
+
+    <messages>
+        <message name="NewOrderSingle" id="99" blockLength="54" semanticType="D">
+            <field name="ClOrdId" id="11" type="idString" offset="0" semanticType="String"/>
+            <field name="Account" id="1" type="idString" offset="8" semanticType="String"/>
+            <field name="Symbol" id="55" type="idString" offset="16" semanticType="String"/>
+            <field name="Side" id="54" type="uint8" offset="24" semanticType="char"/>
+            <field name="TransactTime" id="60" type="uint64" offset="25" semanticType="UTCTimestamp"/>
+            <field name="OrderQty" id="38" type="uint32" offset="33" semanticType="Qty"/>
+            <field name="OrdType" id="40" type="uint8" offset="37" semanticType="char"/>
+            <field name="Price" id="44" type="decimalEncoding" offset="38" semanticType="Price" presence="optional"/>
+        </message>
+    </messages>
+</messageSchema>

@@ -14,6 +14,9 @@
     - Needs to define logic for Client (Initiator) and for Server (Acceptor)
 - FIXSessionManager: Manages session state (logon, heartbeats, reconnections)
 - FIXMessageParser: Decodes incoming FIX messages
+    - FIX SBE (Simple Binary Encoding) message schema
+    - Metadata is normally not sent on the wire with Simple Binary Encoding messages. It is necessary to possess the message schema that was used to encode a message in order to decode it. In other words, Simple Binary Encoding messages are not self-describing. Rather, message schemas are typically exchanged out-of-band between counterparties.
+    - Documentation: https://github.com/FIXTradingCommunity/fix-simple-binary-encoding/tree/master/v2-0-RC3/doc
 - FIXMessageBuilder: Encodes outgoing FIX messages
 - FIXMessageQueue: Lock-free queue for inter-thread communication
 - FIXLogger: Optimized logging for compliance & debugging

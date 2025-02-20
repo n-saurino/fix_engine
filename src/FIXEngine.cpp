@@ -1,6 +1,6 @@
 #include "FIXEngine.hpp"
 
-FIXEngine::FIXEngine(){
+FIXEngine::FIXEngine(): network_handler{}{
 
 }
 
