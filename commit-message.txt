@@ -1,0 +1,15 @@
+feat(codec): Integrate FIX SBE for message encoding/decoding
+
+Explored the FIX Simple Binary Encoding (SBE) protocol and integrated Aeron-IO's SBE tool for generating a codec based on a FIX message schema. This establishes a foundation for efficient, low-latency message encoding and decoding in the FIX engine.
+
+Changes:
+- Studied the FIX SBE specification and its implications for message serialization.
+- Selected Aeron-IO's SBE tool for codec generation to streamline encoding/decoding.
+- Designed an initial FIX SBE message schema for testing and validation.
+- Prepared the framework for future schema extensions and optimizations.
+
+Next steps:
+- Investigate additional message parsing and construction requirements.
+- Develop the Network Handler to optimize message transmission and handling.
+
+Developed and reviewed-by: Nigel Saurino
