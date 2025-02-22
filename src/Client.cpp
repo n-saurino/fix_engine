@@ -23,6 +23,7 @@ int Client::Start(){
             reinterpret_cast<struct sockaddr*>(&client_socket_address),
             static_cast<socklen_t>(client_address_len)); 
 
+    // sending message to server
     send(client_socket_fd, hello, strlen(hello), 0);
     std::cout << "Message sent from client!\n";
 

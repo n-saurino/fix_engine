@@ -11,6 +11,7 @@ class FIXNetworkHandler
 public:
     FIXNetworkHandler(/* args */);
     ~FIXNetworkHandler();
+    void Test(const char* test_type, const int client_socket_fd);
     void Start();
 private:
     /* data */

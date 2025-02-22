@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <cstring>
+#include "NetworkProfiler.hpp"
 
 class Server{
 public:
@@ -13,5 +14,5 @@ public:
     int Stop();
 
 private:
-
+    NetworkProfiler profiler_{};
 };

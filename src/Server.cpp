@@ -32,7 +32,7 @@ int Server::Start(){
          reinterpret_cast<struct sockaddr*>(&serv_socket_address), 
          serv_address_len);
      
-    // listent sets the socket listening for client connections
+    // listen sets the socket listening for client connections
     // 10 is the number of connections that can be queued while the server
     // is busy
     listen(serv_socket_fd, 10);
@@ -41,11 +41,10 @@ int Server::Start(){
     int client_socket_fd{accept(serv_socket_fd, 
                          reinterpret_cast<struct sockaddr*>(&serv_socket_address),
                          reinterpret_cast<socklen_t*>(&serv_address_len))};
-    
-    // read client message into message buffer
-    read(client_socket_fd, message_buffer, 1024);
-    std::cout << "Message from client: " << message_buffer << "\n"; 
-    
+     
+    // simple benchmarking tools
+    profiler_.Benchmark(client_socket_fd);
+
     close(client_socket_fd);
     close(serv_socket_fd);
     return 0;
