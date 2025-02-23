@@ -2,8 +2,7 @@
 
 class FIXMessageParser {
  public:
-  FIXMessageParser(/* args */);
-  ~FIXMessageParser();
+  FIXMessageParser(/* args */) = default;
 
  private:
   /* data */

@@ -8,7 +8,7 @@ void RunServer() { Server server{}; }
 
 void RunFIXEngine() { FIXEngine fix_engine{}; }
 
-int main(int, char**) {
+int main(int argc, char** argv) {
   std::thread server_thread{RunServer};
   std::this_thread::sleep_for(std::chrono::seconds(2));
 

@@ -1,12 +1,13 @@
 #include "FIXNetworkHandler.hpp"
 
-FIXNetworkHandler::FIXNetworkHandler(/* args */) { Start(); }
+#include <array>
 
-FIXNetworkHandler::~FIXNetworkHandler() {}
+FIXNetworkHandler::FIXNetworkHandler(/* args */) { Start(); }
 
 void FIXNetworkHandler::Test(const char* test_type,
                              const int client_socket_fd) {
-  char in_buffer[1024] = {};
+  const int BUFFER_SIZE{1024};
+  std::array<char, BUFFER_SIZE> in_buffer{};
   const char* out_buffer{"PONG"};
   const char* exit_signal{"EXIT"};
   // initiate latency test
@@ -23,7 +24,7 @@ void FIXNetworkHandler::Test(const char* test_type,
 }
 
 void FIXNetworkHandler::Start() {
-  struct sockaddr_in client_socket_address;
+  struct sockaddr_in client_socket_address{};
   int client_address_len{sizeof(client_socket_address)};
   int client_socket_fd{socket(AF_INET, SOCK_STREAM, 0)};
   const char* latency_test{"LATENCY_TEST"};

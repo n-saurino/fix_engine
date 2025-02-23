@@ -3,10 +3,13 @@
 
 class FIXEngine {
  public:
-  FIXEngine(/* args */);
-  ~FIXEngine();
+  FIXEngine(/* args */) = default;
+  // ~FIXEngine() = default;
+  // FIXEngine(const FIXEngine&) = delete;
+  // FIXEngine(const FIXEngine&&) = delete;
+  // constexpr auto operator=(const FIXEngine&) -> FIXEngine& = delete;
+  // constexpr auto operator=(const FIXEngine&&) -> FIXEngine& = delete;
 
  private:
-  FIXNetworkHandler network_handler{};
-  /* data */
+  FIXNetworkHandler network_handler;
 };
