@@ -1,14 +1,12 @@
 #pragma once
 #include "FIXNetworkHandler.hpp"
 
-class FIXEngine
-{
-public:
-    FIXEngine(/* args */);
-    ~FIXEngine();
+class FIXEngine {
+ public:
+  FIXEngine(/* args */);
+  ~FIXEngine();
 
-private:
-    FIXNetworkHandler network_handler{};
-    /* data */
+ private:
+  FIXNetworkHandler network_handler{};
+  /* data */
 };
-

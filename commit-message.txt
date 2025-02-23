@@ -1,15 +1,16 @@
-perf(benchmark): Implement Network Profiler for RTT measurements
+chore(build): Configure clang-tidy, clang-format, and CMake defaults
 
-Created a benchmarking framework within the Network Profiler to measure round-trip time (RTT), latency, and throughput of client transmissions. This establishes baseline performance metrics for future optimizations of the FIX engine.
+Configured clang-tidy for project-wide linting to enforce C++ best practices and maintain code quality. Integrated clang-format to ensure compliance with Google's C++ style guide. Additionally, set a default CMake kit and build configuration to streamline development workflows.
 
 Changes:
-- Implemented initial benchmarking framework focused on RTT measurements
-- Developed dedicated tests for latency and throughput evaluation
-- Created new NetworkProfiler class to encapsulate benchmarking functionality
+- Added clang-tidy for automated linting and C++ best practice enforcement.
+- Configured clang-format to align with Google's C++ style guide.
+- Set a default CMake kit and build configuration for consistency.
 
 Next steps:
-- Implement performance logging system to track optimization improvements
-- Migrate from char buffers to FIX SBE for performance comparison
-- Research and apply socket programming optimization techniques
+- Implement a performance logging system to track optimization improvements.
+- Migrate from char buffers to FIX SBE for a performance comparison.
+- Research and apply socket programming optimization techniques.
+- Refactor legacy code to align with C++ best practices and style guidelines.
 
-Developed and reviewed-by: Nigel Saurin
+Authored and reviewed by: Nigel Saurino

@@ -1,24 +1,21 @@
-#include "Server.hpp"
-#include "FIXEngine.hpp"
 #include <chrono>
 #include <thread>
 
-void RunServer(){
-    Server server{};
-}
+#include "FIXEngine.hpp"
+#include "Server.hpp"
 
-void RunFIXEngine(){
-    FIXEngine fix_engine{};
-}
+void RunServer() { Server server{}; }
 
-int main(int, char**){
-    std::thread server_thread{RunServer};
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+void RunFIXEngine() { FIXEngine fix_engine{}; }
 
-    std::thread client_thread{RunFIXEngine};
-    client_thread.join();
-    
-    server_thread.join();
+int main(int, char**) {
+  std::thread server_thread{RunServer};
+  std::this_thread::sleep_for(std::chrono::seconds(2));
 
-    return 0;
+  std::thread client_thread{RunFIXEngine};
+  client_thread.join();
+
+  server_thread.join();
+
+  return 0;
 }

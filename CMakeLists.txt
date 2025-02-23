@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 3.5.0)
 project(main VERSION 0.1.0 LANGUAGES C CXX)
 
 # Set the C++ standard
-set(CMAKE_CXX_STANDARD 20)  # Use C++17, you can change this to 11, 14, 20, etc.
+set(CMAKE_CXX_STANDARD 20)  # Use C++20, you can change this to 11, 14, 20, etc.
 set(CMAKE_CXX_STANDARD_REQUIRED True)  # Ensure the compiler enforces the standard
+set(CMAKE_CXX_COMPILER /usr/bin/g++)
 set(CMAKE_CXX_EXTENSIONS OFF)  # Disable compiler-specific extensions
 
 # Explicitly enable exceptions for GCC/Clang
@@ -27,7 +28,7 @@ find_package(GTest REQUIRED)
 
 add_executable(main src/main.cpp src/Server.cpp src/Client.cpp src/FIXEngine.cpp
                src/FIXNetworkHandler.cpp src/FIXMessageParser.cpp
-               src/NetworkProfiler.cpp)
+               src/NetworkProfiler.cpp src/PerformanceLogger.cpp)
 
 # Include Boost headers
 target_include_directories(main PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/generated/sbe")

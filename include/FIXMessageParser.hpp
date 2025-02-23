@@ -1,12 +1,10 @@
 #pragma once
 
-class FIXMessageParser
-{
-public:
-    FIXMessageParser(/* args */);
-    ~FIXMessageParser();
+class FIXMessageParser {
+ public:
+  FIXMessageParser(/* args */);
+  ~FIXMessageParser();
 
-private:
-    /* data */
+ private:
+  /* data */
 };
-
