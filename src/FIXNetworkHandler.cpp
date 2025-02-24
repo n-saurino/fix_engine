@@ -27,7 +27,7 @@ void FIXNetworkHandler::Test(const char* test_type,
 
 void FIXNetworkHandler::Start() {
   const int BUFFER_SIZE{1024};
-  const int PORT_NO{8080};
+  const int PORT_NUM{8080};
   struct sockaddr_in client_socket_address{};
   int client_address_len{sizeof(client_socket_address)};
   int client_socket_fd{socket(AF_INET, SOCK_STREAM, 0)};
@@ -36,7 +36,7 @@ void FIXNetworkHandler::Start() {
   const char* out_buffer{"PONG\n"};
   std::array<char, BUFFER_SIZE> in_buffer{};
   client_socket_address.sin_family = AF_INET;
-  client_socket_address.sin_port = htons(PORT_NO);
+  client_socket_address.sin_port = htons(PORT_NUM);
 
   inet_pton(AF_INET, "127.0.0.1", &client_socket_address.sin_addr);
 
@@ -55,3 +55,7 @@ void FIXNetworkHandler::Start() {
 
   close(client_socket_fd);
 }
+
+// Improvement: Consider overloading or templating for different message
+// objects?
+void FIXNetworkHandler::SendMessage(/* Message Object */) {}

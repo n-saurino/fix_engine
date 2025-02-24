@@ -2,22 +2,22 @@
 
 Server::Server() { Start(); }
 
-Server::~Server() {}
-
-int Server::Start() {
+auto Server::Start() -> int {
+  const int BUFFER_SIZE{1024};
+  const int PORT_NUM{8080};
   // declare socket_address struct
   struct sockaddr_in serv_socket_address{};
   int serv_address_len{sizeof(serv_socket_address)};
   // create Server TCP socket
   int serv_socket_fd{socket(AF_INET, SOCK_STREAM, 0)};
   // create message buffer to store client messages
-  char message_buffer[1024] = {0};
+  std::array<char, BUFFER_SIZE> message_buffer{0};
 
   int opt{1};
 
   setsockopt(serv_socket_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
   serv_socket_address.sin_family = AF_INET;
-  serv_socket_address.sin_port = htons(8080);
+  serv_socket_address.sin_port = htons(PORT_NUM);
   serv_socket_address.sin_addr.s_addr = INADDR_ANY;
 
   // bind allows socket to listen for incoming client connections on
@@ -30,7 +30,8 @@ int Server::Start() {
   // listen sets the socket listening for client connections
   // 10 is the number of connections that can be queued while the server
   // is busy
-  listen(serv_socket_fd, 10);
+  const int QUEUED_SOCKET_NUM{10};
+  listen(serv_socket_fd, QUEUED_SOCKET_NUM);
 
   // accept a client connection on the socket
   int client_socket_fd{accept(
@@ -45,4 +46,4 @@ int Server::Start() {
   return 0;
 }
 
-int Server::Stop() { return 0; }
+auto Server::Stop() -> int { return 0; }
