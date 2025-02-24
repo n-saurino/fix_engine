@@ -48,6 +48,12 @@ void FIXNetworkHandler::Start() {
       connect(client_socket_fd,
               reinterpret_cast<struct sockaddr*>(&client_socket_address),
               static_cast<socklen_t>(client_address_len));
+  if (connect_result == -1) {
+    std::cerr << "Client's network handler failed to connect: "
+              << std::strerror(errno) << "\n";
+    close(client_socket_fd);
+    return;
+  }
 
   Test(latency_test, client_socket_fd);
   Test(throughput_test, client_socket_fd);

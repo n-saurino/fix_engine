@@ -1,11 +1,11 @@
-refactor(core): Perform initial C++ best practices cleanup
+fix(network): Improve socket error handling and buffer safety
 
-Completed a first-pass cleanup of project files to improve adherence to C++ best practices. Added empty FIXMessageBuilder class to implement as our next feature. Additionally, identified the need to implement exception handling in the socket programming module.
+Updated socket programming error handling for base functionality, with plans to revisit and refine it further this weekend. Adjusted the Network Profiler benchmark test functions to be static for better compliance with C++ best practices. Additionally, added null termination to the `in_buffer` to prevent buffer overflow risks.
 
 Changes:
-- Performed initial cleanup and refactored code for C++ best practices compliance.
-- Added empty `FIXMessageBuilder` to support upcoming FIX SBE message transmission.
-- Identified missing exception handling in socket programming (to be addressed).
+- Enhanced socket error handling logic (to be revisited this weekend).
+- Made Network Profiler benchmark test functions static for C++ best practices compliance.
+- Added null termination to `in_buffer` to mitigate potential buffer overflows.
 
 Next steps:
 - Implement basic FIX SBE message transmission between the Engine and test server within the next 24 hours.

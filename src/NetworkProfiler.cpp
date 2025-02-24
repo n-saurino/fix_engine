@@ -51,6 +51,8 @@ void NetworkProfiler::BenchmarkLatency(int client_socket_fd) {
     // send and then receive from client
     send(client_socket_fd, out_buffer, strlen(out_buffer), 0);
     recv(client_socket_fd, &in_buffer, sizeof(in_buffer), 0);
+    // ensuring null termination in case of buffer overflow
+    in_buffer.at(sizeof(in_buffer) - 1) = '\0';
     const auto end{std::chrono::high_resolution_clock::now()};
     const auto diff{
         std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
@@ -87,6 +89,8 @@ void NetworkProfiler::BenchmarkThroughput(int client_socket_fd) {
     std::array<char, BUFFER_SIZE> in_buffer{};
     send(client_socket_fd, out_buffer, strlen(out_buffer), 0);
     recv(client_socket_fd, &in_buffer, sizeof(in_buffer), 0);
+    // ensuring null termination in case of buffer overflow
+    in_buffer.at(sizeof(in_buffer) - 1) = '\0';
     ++total_messages;
   }
 

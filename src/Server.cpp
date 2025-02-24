@@ -10,6 +10,12 @@ auto Server::Start() -> int {
   int serv_address_len{sizeof(serv_socket_address)};
   // create Server TCP socket
   int serv_socket_fd{socket(AF_INET, SOCK_STREAM, 0)};
+  // REFACTOR: need to add proper exception handling
+  if (serv_socket_fd < 0) {
+    std::cerr << "Server socket creation error: " << std::strerror(errno)
+              << "\n";
+    return -1;
+  }
   // create message buffer to store client messages
   std::array<char, BUFFER_SIZE> message_buffer{0};
 
@@ -24,20 +30,34 @@ auto Server::Start() -> int {
   // a specific address and port
   // side note: static_cast<> doesn't work because it's meant for "safe"
   // conversions
-  bind(serv_socket_fd, reinterpret_cast<struct sockaddr*>(&serv_socket_address),
-       serv_address_len);
+  if (bind(serv_socket_fd,
+           reinterpret_cast<struct sockaddr*>(&serv_socket_address),
+           serv_address_len) < 0) {
+    std::cerr << "Server socket bind error: " << std::strerror(errno) << "\n";
+    close(serv_socket_fd);
+    return -1;
+  }
 
   // listen sets the socket listening for client connections
   // 10 is the number of connections that can be queued while the server
   // is busy
   const int QUEUED_SOCKET_NUM{10};
-  listen(serv_socket_fd, QUEUED_SOCKET_NUM);
+  if (listen(serv_socket_fd, QUEUED_SOCKET_NUM) < 0) {
+    std::cerr << "Server socket listen error: " << std::strerror(errno) << "\n";
+    close(serv_socket_fd);
+    return -1;
+  }
 
   // accept a client connection on the socket
   int client_socket_fd{accept(
       serv_socket_fd, reinterpret_cast<struct sockaddr*>(&serv_socket_address),
       reinterpret_cast<socklen_t*>(&serv_address_len))};
 
+  if (client_socket_fd < 0) {
+    std::cerr << "Client socket accept error: " << std::strerror(errno) << "\n";
+    close(serv_socket_fd);
+    return -1;
+  }
   // simple benchmarking tools
   profiler_.Benchmark(client_socket_fd);
 

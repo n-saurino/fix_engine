@@ -6,6 +6,7 @@
 #include <array>
 #include <cstring>
 #include <iostream>
+#include <sstream>
 
 #include "NetworkProfiler.hpp"
 
