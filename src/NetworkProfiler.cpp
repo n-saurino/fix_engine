@@ -7,30 +7,31 @@
 #include <cstring>
 #include <iostream>
 #include <numeric>
+#include <string_view>
 #include <vector>
 
 NetworkProfiler::NetworkProfiler(/* args */) : logger_{""} {}
 
-NetworkProfiler::~NetworkProfiler() {}
-
 void NetworkProfiler::Benchmark(int client_socket_fd) {
-  char in_buffer[1024] = {};
+  const int BUFFER_SIZE{1024};
+  std::array<char, BUFFER_SIZE> in_buffer{};
   int nbytes_r{};
-  while ((nbytes_r = recv(client_socket_fd, in_buffer, sizeof(in_buffer) - 1,
-                          0)) > 0) {
+  while ((nbytes_r = static_cast<int>(recv(client_socket_fd, &in_buffer,
+                                           sizeof(in_buffer) - 1, 0))) > 0) {
     if (nbytes_r > 0) {
-      in_buffer[nbytes_r] = '\0';  // Ensure null termination
+      in_buffer.at(nbytes_r) = '\0';  // Ensure null termination
     }
 
-    if (!strcmp(in_buffer, "EXIT")) {
+    if (std::string_view(in_buffer.data()) == "EXIT") {
       std::cout << "Received EXIT signal. Stopping benchmark.\n";
       break;
     }
 
-    std::cout << "\nRunning: " << in_buffer << "\n";
-    if (!strcmp(in_buffer, "LATENCY_TEST")) {
+    std::cout << "\nRunning: " << in_buffer.data() << "\n";
+    std::string_view in_buffer_sv = in_buffer.data();
+    if (in_buffer_sv == "LATENCY_TEST") {
       BenchmarkLatency(client_socket_fd);
-    } else if (!strcmp(in_buffer, "THROUGHPUT_TEST")) {
+    } else if (in_buffer_sv == "THROUGHPUT_TEST") {
       BenchmarkThroughput(client_socket_fd);
     }
   }
@@ -38,17 +39,18 @@ void NetworkProfiler::Benchmark(int client_socket_fd) {
 
 void NetworkProfiler::BenchmarkLatency(int client_socket_fd) {
   std::vector<long long> latencies{};
-  int num_events{100000};
+  const int num_events{100000};
   latencies.reserve(num_events);
   const char* out_buffer{"PING"};
   const char* exit_signal{"EXIT"};
 
   for (int i{}; i < num_events; ++i) {
-    char in_buffer[1024] = {};
+    const int BUFFER_SIZE{1024};
+    std::array<char, BUFFER_SIZE> in_buffer{};
     const auto start{std::chrono::high_resolution_clock::now()};
     // send and then receive from client
     send(client_socket_fd, out_buffer, strlen(out_buffer), 0);
-    recv(client_socket_fd, in_buffer, sizeof(in_buffer), 0);
+    recv(client_socket_fd, &in_buffer, sizeof(in_buffer), 0);
     const auto end{std::chrono::high_resolution_clock::now()};
     const auto diff{
         std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
@@ -73,17 +75,18 @@ void NetworkProfiler::BenchmarkLatency(int client_socket_fd) {
 }
 
 void NetworkProfiler::BenchmarkThroughput(int client_socket_fd) {
-  int duration{5};
+  const int duration{5};
   const char* out_buffer{"PONG"};
   const char* exit_signal{"EXIT"};
   const auto start{std::chrono::high_resolution_clock::now()};
   const auto end{start + std::chrono::seconds(5)};
   double total_messages{};
+  const int BUFFER_SIZE{1024};
 
   while (std::chrono::high_resolution_clock::now() < end) {
-    char in_buffer[1024] = {};
+    std::array<char, BUFFER_SIZE> in_buffer{};
     send(client_socket_fd, out_buffer, strlen(out_buffer), 0);
-    recv(client_socket_fd, in_buffer, sizeof(in_buffer), 0);
+    recv(client_socket_fd, &in_buffer, sizeof(in_buffer), 0);
     ++total_messages;
   }
 
