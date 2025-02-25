@@ -1,16 +1,16 @@
-fix(network): Improve socket error handling and buffer safety
+fix(network): Improve error handling and buffer safety in socket operations
 
-Updated socket programming error handling for base functionality, with plans to revisit and refine it further this weekend. Adjusted the Network Profiler benchmark test functions to be static for better compliance with C++ best practices. Additionally, added null termination to the `in_buffer` to prevent buffer overflow risks.
+Added basic error catching for `send()` and `recv()` to improve robustness in network communication. Fixed a buffer overflow issue in `recv()` within the Network Profiler, enhancing reliability and stability in benchmarking.
 
 Changes:
-- Enhanced socket error handling logic (to be revisited this weekend).
-- Made Network Profiler benchmark test functions static for C++ best practices compliance.
-- Added null termination to `in_buffer` to mitigate potential buffer overflows.
+- Implemented basic error handling for `send()` and `recv()` to prevent failures from propagating.
+- Fixed buffer overflow correction in `recv()` in the Network Profiler.
 
 Next steps:
 - Implement basic FIX SBE message transmission between the Engine and test server within the next 24 hours.
 - Continue refining exception handling in the socket programming module.
 - Implement a performance logging system to track optimization improvements.
 - Further optimize message handling for performance and reliability.
+- Investigate and fix rare occurrences of negative minimum latencies in latency benchmarking.
 
 Authored and reviewed by: Nigel Saurino
