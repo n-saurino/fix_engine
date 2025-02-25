@@ -17,7 +17,5 @@ int main(int argc, char** argv) {
 
   server_thread.join();
 
-  std::cout << "Hello, AI Reviewer!\n";
-
   return 0;
 }

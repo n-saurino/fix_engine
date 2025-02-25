@@ -3,18 +3,19 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#include <array>
 #include <cstring>
 #include <iostream>
+#include <sstream>
 
 #include "NetworkProfiler.hpp"
 
 class Server {
  public:
   Server();
-  ~Server();
-  int Start();
-  int Stop();
+  auto Start() -> int;
+  auto Stop() -> int;
 
  private:
-  NetworkProfiler profiler_{};
+  NetworkProfiler profiler_;
 };
