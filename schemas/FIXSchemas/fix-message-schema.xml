@@ -25,7 +25,12 @@
             <validValue name="Buy">1</validValue>
             <validValue name="Sell">2</validValue>
         </enum>
-
+        <enum name="ordTypeEnum" encodingType="char">
+            <validValue name="Market">1</validValue>
+            <validValue name="Limit">2</validValue>
+            <validValue name="Stop">3</validValue>
+            <validValue name="StopLimit">4</validValue>
+        </enum>
         <composite name="decimalEncoding">
             <type name="mantissa" primitiveType="int64"/>
             <type name="exponent" primitiveType="int8" presence="constant">-3</type>
