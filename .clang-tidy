@@ -20,3 +20,4 @@ WarningsAsErrors: >
   readability-implicit-bool-conversion,
   readability-inconsistent-declaration-parameter-name
 HeaderFilterRegex: ".*"
+Exclude: '.*(generated/sbe/).*'
