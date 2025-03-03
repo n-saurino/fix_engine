@@ -3,6 +3,8 @@
 #include <array>
 #include <string_view>
 
+#include "FIXMessageBuilder.hpp"
+
 FIXNetworkHandler::FIXNetworkHandler(/* args */) { Start(); }
 
 void FIXNetworkHandler::Test(const char* test_type,
@@ -64,4 +66,20 @@ void FIXNetworkHandler::Start() {
 
 // Improvement: Consider overloading or templating for different message
 // objects?
-void FIXNetworkHandler::SendMessage(/* Message Object */) {}
+void FIXNetworkHandler::SendMessage(/* Message Object */) {
+  std::array<char, 2048> buffer{};
+  FIXMessageBuilder fix_msg_bldr;
+  sbe::MessageHeader hdr;
+  sbe::NewOrderSingle new_order_single;
+
+  std::size_t encode_hdr_len{fix_msg_bldr.EncodeHeader(
+      hdr, new_order_single, buffer.data(), 0, sizeof(buffer))};
+
+  std::size_t encode_msg_len{fix_msg_bldr.EncodeMessage(
+      new_order_single, buffer.data(), hdr.encodedLength(), sizeof(buffer))};
+
+  std::cout << "Encoded Lengths are " << encode_hdr_len << " + "
+            << encode_msg_len << "\n";
+
+  // IMPROVEMENT: need to send message over the wire
+}

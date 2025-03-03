@@ -3,8 +3,9 @@ chore(work-in-progress): End of day push for continuation from another setup
 Pushing the latest changes to ensure work can continue from another machine if needed. This is not a finalized checkpoint, but a work-in-progress commit to preserve current progress.
 
 Changes:
-- Built an order struct to support upcoming functionalities.
 - Started the implementation of the MessageBuilder class.
+- Started the implementation of the MessageParser class.
+- Breaking out a FIX test server in a separate docker container using QuickFIX
 
 Next steps:
 - Implement basic FIX SBE message transmission between the Engine and test server.
