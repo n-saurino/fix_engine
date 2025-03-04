@@ -52,22 +52,28 @@ void FIXNetworkHandler::Start() {
               static_cast<socklen_t>(client_address_len));
   if (connect_result == -1) {
     std::cerr << "Client's network handler failed to connect: "
-              << std::strerror(errno) << "\n";
+              << strerror(errno) << "\n";
     close(client_socket_fd);
     return;
   }
 
-  Test(latency_test, client_socket_fd);
-  Test(throughput_test, client_socket_fd);
-  Test("EXIT", client_socket_fd);
+  // test protocol
+  // Test(latency_test, client_socket_fd);
+  // Test(throughput_test, client_socket_fd);
+  // Test("EXIT", client_socket_fd);
+
+  // test FIX SBE protocol communication
+  SendMessage(client_socket_fd);
 
   close(client_socket_fd);
 }
 
 // Improvement: Consider overloading or templating for different message
 // objects?
-void FIXNetworkHandler::SendMessage(/* Message Object */) {
-  std::array<char, 2048> buffer{};
+void FIXNetworkHandler::SendMessage(/* Message, */ const int client_socket_fd) {
+  const int kBufferSize{2048};
+  std::array<char, kBufferSize> buffer{};
+  std::array<char, kBufferSize> in_buffer{};
   FIXMessageBuilder fix_msg_bldr;
   sbe::MessageHeader hdr;
   sbe::NewOrderSingle new_order_single;
@@ -82,4 +88,21 @@ void FIXNetworkHandler::SendMessage(/* Message Object */) {
             << encode_msg_len << "\n";
 
   // IMPROVEMENT: need to send message over the wire
+  int nbytes_s =
+      static_cast<int>(send(client_socket_fd, new_order_single.buffer(),
+                            new_order_single.bufferLength(), 0));
+
+  if (nbytes_s < 0) {
+    std::cerr << "FIXNetworkHandler failed to send message to client: "
+              << strerror(errno) << "\n";
+  }
+
+  int nbytes_r = static_cast<int>(
+      recv(client_socket_fd, &in_buffer, sizeof(in_buffer), 0));
+
+  if (nbytes_r < 0) {
+    std::cerr
+        << "FIXNetworkHandler failed to receive message from test server: "
+        << strerror(errno) << "\n";
+  }
 }

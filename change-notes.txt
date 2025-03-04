@@ -1,0 +1,5 @@
+* Updated clang-tidy to be more conformant with google style guide
+* Moved the Test server to its own repository and docker container
+* Deploying Test server with docker-compose
+* Created a docker network for the FIX client and FIX server to communicate
+* Removed FIX server files from FIX client engine
