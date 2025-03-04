@@ -6,9 +6,9 @@
 #include "NewOrderSingle.h"
 #include "Order.hpp"
 
-class FIXMessageParser {
+class SBEMessageParser {
  public:
-  FIXMessageParser(/* args */) = default;
+  SBEMessageParser(/* args */) = default;
   auto DecodeHeader(sbe::MessageHeader& header, char* buffer,
                     std::uint64_t offset, std::uint64_t buffer_len)
       -> std::size_t;
@@ -21,4 +21,3 @@ class FIXMessageParser {
  private:
   /* data */
 };
-

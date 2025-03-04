@@ -1,8 +1,8 @@
-#include "FIXMessageParser.hpp"
+#include "SBEMessageParser.hpp"
 
 const int MESSAGE_HEADER_VERSION{0};
 
-auto FIXMessageParser::DecodeHeader(sbe::MessageHeader& header, char* buffer,
+auto SBEMessageParser::DecodeHeader(sbe::MessageHeader& header, char* buffer,
                                     uint64_t offset, uint64_t buffer_len)
     -> std::size_t {
   header.wrap(buffer, offset, MESSAGE_HEADER_VERSION, buffer_len);
@@ -18,7 +18,7 @@ auto FIXMessageParser::DecodeHeader(sbe::MessageHeader& header, char* buffer,
   return header.encodedLength();
 }
 
-auto FIXMessageParser::DecodeMessage(sbe::NewOrderSingle& message, char* buffer,
+auto SBEMessageParser::DecodeMessage(sbe::NewOrderSingle& message, char* buffer,
                                      std::uint64_t offset,
                                      std::uint64_t acting_block_len,
                                      std::uint64_t acting_version,

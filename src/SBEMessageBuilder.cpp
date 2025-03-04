@@ -1,10 +1,10 @@
-#include "FIXMessageBuilder.hpp"
+#include "SBEMessageBuilder.hpp"
 
 const int MESSAGE_HEADER_VERSION{0};
 
-FIXMessageBuilder::FIXMessageBuilder(){}
+SBEMessageBuilder::SBEMessageBuilder() {}
 
-auto FIXMessageBuilder::EncodeHeader(sbe::MessageHeader& header,
+auto SBEMessageBuilder::EncodeHeader(sbe::MessageHeader& header,
                                      sbe::NewOrderSingle& new_order,
                                      char* buffer, std::uint64_t offset,
                                      std::uint64_t buffer_len) -> std::size_t {
@@ -18,7 +18,7 @@ auto FIXMessageBuilder::EncodeHeader(sbe::MessageHeader& header,
   return header.encodedLength();
 }
 // builds and returns a FIX SBE message based on string input of fields
-auto FIXMessageBuilder::EncodeMessage(sbe::NewOrderSingle& new_order,
+auto SBEMessageBuilder::EncodeMessage(sbe::NewOrderSingle& new_order,
                                       char* buffer, std::uint64_t offset,
                                       std::uint64_t buffer_len) -> std::size_t {
   new_order.wrapForEncode(buffer, offset, buffer_len)

@@ -10,6 +10,7 @@ int main(int argc, char** argv) {
 
   std::thread client_thread{RunFIXEngine};
   client_thread.join();
-
+  // FIXMessageParser parser;
+  // parser.Parse();
   return 0;
 }

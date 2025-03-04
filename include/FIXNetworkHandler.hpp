@@ -7,8 +7,8 @@
 #include <cstring>
 #include <iostream>
 
-#include "MessageHeader.h"
-#include "NewOrderSingle.h"
+#include "FIXMessageBuilder.hpp"
+#include "FIXMessageParser.hpp"
 
 class FIXNetworkHandler {
  public:
