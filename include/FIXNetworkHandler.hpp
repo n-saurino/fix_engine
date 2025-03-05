@@ -15,7 +15,9 @@ class FIXNetworkHandler {
   FIXNetworkHandler(/* args */);
   void Test(const char* test_type, int client_socket_fd);
   void Start();
+  static void SendLogon(/* Message, */ const int client_socket_fd);
   static void SendMessage(/* Message, */ const int client_socket_fd);
+  static void ReceiveMessage(const int client_socket_fd);
 
  private:
   /* data */

@@ -1,17 +1,20 @@
-chore(work-in-progress): End of day push for continuation from another setup
+feat(infra): Refactor test server setup and implement initial FIXMessageBuilder
 
-Pushing the latest changes to ensure work can continue from another machine if needed. This is not a finalized checkpoint, but a work-in-progress commit to preserve current progress.
+Updated project infrastructure by separating the Test Server into its own repository and Docker container, enabling deployment via `docker-compose`. Established a dedicated Docker network for FIX client-server communication. Additionally, implemented a naive `FIXMessageBuilder` and successfully sent a Logon message to the FIX Test Server running QuickFIX. Abandoning FIX SBE for now in favor of standard FIX due to broader support in testing environments.
 
 Changes:
-- Started the implementation of the MessageBuilder class.
-- Started the implementation of the MessageParser class.
-- Breaking out a FIX test server in a separate docker container using QuickFIX
+- Updated `clang-tidy` configuration to better conform to Google's C++ style guide.
+- Moved Test Server to a separate repository and Docker container.
+- Deployed Test Server using `docker-compose`.
+- Created a dedicated Docker network for FIX client-server communication.
+- Removed FIX Server files from the FIX Client Engine.
+- Implemented a naive `FIXMessageBuilder` for initial message construction.
+- Successfully deployed the Test Server with QuickFIX.
+- Sent a Logon message to the FIX Test Server, confirming communication.
+- Abandoned FIX SBE for now in favor of standard FIX for better testing support.
 
 Next steps:
-- Implement basic FIX SBE message transmission between the Engine and test server.
-- Continue refining exception handling in the socket programming module.
-- Implement a performance logging system to track optimization improvements.
-- Further optimize message handling for performance and reliability.
-- Investigate and fix rare occurrences of negative minimum latencies in latency benchmarking.
+- Develop a more robust system for building and managing FIX messages across multiple types (Logon, Logout, NewOrderSingle, etc.).
+- Begin benchmarking message-building performance using Google Benchmark.
 
 Authored and reviewed by: Nigel Saurino
