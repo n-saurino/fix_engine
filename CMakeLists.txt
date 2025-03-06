@@ -31,7 +31,7 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 add_executable(main ${SOURCES})
 
 # Include Boost headers
-target_include_directories(main PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/generated/sbe" "${CMAKE_SOURCE_DIR}/generated/fix44")
+target_include_directories(main PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/generated/sbe")
 
 file(GLOB SBE_GENERATED ${CMAKE_SOURCE_DIR}/generated/sbe/*.h)
 
@@ -39,3 +39,7 @@ add_library(sbe_generated INTERFACE)
 
 # Link Boost libraries
 target_link_libraries(main PRIVATE ${Boost_LIBRARIES} GTest::GTest GTest::Main pthread sbe_generated)
+
+# Add this at the end of your CMakeLists.txt
+enable_testing()
+add_subdirectory(tests)

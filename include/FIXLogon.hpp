@@ -8,7 +8,7 @@ class FIXLogon : public FIXMessage<FIXLogon> {
     fix_buffer_.Append(35, "A");
     fix_buffer_.Append(49, "FIX_CLIENT");
     fix_buffer_.Append(56, "FIX_SERVER");
-    fix_buffer_.Append(34, 1);
+    fix_buffer_.Append(34, seq_num_);
     fix_buffer_.AppendUTC(52);
     fix_buffer_.Append(98, 0);
     fix_buffer_.Append(108, 30);

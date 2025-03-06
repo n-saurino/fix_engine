@@ -3,7 +3,12 @@
 #include <array>
 #include <string_view>
 
-FIXNetworkHandler::FIXNetworkHandler(/* args */) { Start(); }
+FIXNetworkHandler::FIXNetworkHandler(/* args */) {
+  for (size_t i{}; i < kMaxSockets; ++i) {
+    sockets_[i] = -1;
+  }
+  Start();
+}
 
 void FIXNetworkHandler::Test(const char* test_type,
                              const int client_socket_fd) {
@@ -54,27 +59,20 @@ void FIXNetworkHandler::Start() {
     close(client_socket_fd);
     return;
   }
-
+  sockets_[socket_idx_++] = client_socket_fd;
   // test protocol
   // Test(latency_test, client_socket_fd);
   // Test(throughput_test, client_socket_fd);
   // Test("EXIT", client_socket_fd);
+}
 
-  // test FIX SBE protocol communication
-  FIXBuffer fix_buffer;
-  FIXLogon fix_logon_msg{fix_buffer};
-  fix_logon_msg.Serialize();
-  Send(fix_buffer, client_socket_fd);
-  ReceiveMessage(client_socket_fd);
-
-  fix_buffer.Reset();
-  FIXNewOrderSingle fix_newordersingle_msg{fix_buffer};
-  fix_newordersingle_msg.Serialize();
-  Send(fix_buffer, client_socket_fd);
-  ReceiveMessage(client_socket_fd);
-
-  std::cout << "Closing client socket...\n";
-  close(client_socket_fd);
+void FIXNetworkHandler::Stop() {
+  std::cout << "Closing client sockets...\n";
+  for (auto socket : sockets_) {
+    if (socket) {
+      close(socket);
+    }
+  }
 }
 
 // Improvement: Consider overloading or templating for different message
@@ -95,17 +93,20 @@ void FIXNetworkHandler::Send(FIXBuffer& fix_buffer,
   }
 }
 
-void FIXNetworkHandler::ReceiveMessage(const int client_socket_fd) {
-  const int kBufferSize{1024};
-  std::array<char, kBufferSize> in_buffer{};
-
-  int nbytes_r{static_cast<int>(
-      recv(client_socket_fd, &in_buffer, in_buffer.size(), 0))};
+void FIXNetworkHandler::ReceiveMessage(char (&buffer)[1024],
+                                       const int client_socket_fd) {
+  int nbytes_r{
+      static_cast<int>(recv(client_socket_fd, buffer, sizeof(buffer), 0))};
 
   if (nbytes_r < 0) {
     std::cerr << "Client FIXNetworkHandler failed to receive message: "
               << strerror(errno) << "\n";
   }
 
-  std::cout << "Received from Test Server: " << in_buffer.data() << "\n";
+  std::cout << "Received from Test Server: " << buffer << "\n";
+}
+
+auto FIXNetworkHandler::GetSocket(const int requested_socket) const -> const
+    int {
+  return sockets_.at(requested_socket);
 }

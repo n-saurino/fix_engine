@@ -77,6 +77,9 @@ RUN wget https://archives.boost.io/release/1.85.0/source/boost_1_85_0.tar.gz && 
 # Copy project files into the container
 COPY . /workspace
 
+# Give tests script execute permissions
+RUN chmod +x /workspace/run_tests.sh
+
 # Add explicit compiler flags to enable exceptions
 RUN export CXXFLAGS="-fexceptions" && \
     export CFLAGS="-fexceptions"

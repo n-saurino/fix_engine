@@ -1,8 +1,9 @@
 #pragma once
 #include "FIXBuffer.hpp"
+#include "FIXMessageBase.hpp"
 
 template <typename Derived>
-class FIXMessage {
+class FIXMessage : public FIXMessageBase {
  public:
   explicit FIXMessage(FIXBuffer& buffer) : fix_buffer_{buffer} {}
   // calls derived class Serialize function

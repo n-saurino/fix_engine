@@ -4,7 +4,9 @@
 #include <cstring>
 #include <ctime>
 #include <iostream>
-
+/* IMPROVEMENT: could we build a std::array that maps all tags to their string
+equivalents and then memcpy those over. Then we just need to figure out how to
+efficiently convert an int to a char[] for the value*/
 class FIXBuffer {
  public:
   // IMPROVEMENT: Let's find a way to use memcpy without snprintf. This is
