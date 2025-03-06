@@ -4,7 +4,6 @@
 
 #include "MessageHeader.h"
 #include "NewOrderSingle.h"
-#include "Order.hpp"
 
 class SBEMessageParser {
  public:

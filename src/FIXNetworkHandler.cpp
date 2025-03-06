@@ -61,37 +61,33 @@ void FIXNetworkHandler::Start() {
   // Test("EXIT", client_socket_fd);
 
   // test FIX SBE protocol communication
-  SendLogon(client_socket_fd);
+  FIXBuffer fix_buffer;
+  FIXLogon fix_logon_msg{fix_buffer};
+  fix_logon_msg.Serialize();
+  Send(fix_buffer, client_socket_fd);
   ReceiveMessage(client_socket_fd);
-  // SendMessage(client_socket_fd);
-  // ReceiveMessage(client_socket_fd);
+
+  fix_buffer.Reset();
+  FIXNewOrderSingle fix_newordersingle_msg{fix_buffer};
+  fix_newordersingle_msg.Serialize();
+  Send(fix_buffer, client_socket_fd);
+  ReceiveMessage(client_socket_fd);
+
+  std::cout << "Closing client socket...\n";
   close(client_socket_fd);
 }
 
 // Improvement: Consider overloading or templating for different message
 // objects?
-void FIXNetworkHandler::SendLogon(/* Message, */ const int client_socket_fd) {
-  FIXMessageBuilder msg_bldr{};
+void FIXNetworkHandler::Send(FIXBuffer& fix_buffer,
+                             const int client_socket_fd) {
+  // FIXMessageBuilder msg_bldr{};
   std::cout << "Sending message to FIX Server...\n";
-  int nbytes_s = static_cast<int>(
-      send(client_socket_fd, msg_bldr.Data(), msg_bldr.Size(), 0));
-
-  if (nbytes_s < 0) {
-    std::cerr << "FIXNetworkHandler failed to send: " << strerror(errno)
-              << "\n";
-  }
-}
-
-void FIXNetworkHandler::SendMessage(/* Message, */ const int client_socket_fd) {
-  const int kBufferSize{2048};
-  std::array<char, kBufferSize> buffer{
-      "8=FIX.4.29=12835=D49=FIX_CLIENT56=FIX_SERVER34=2"
-      "52=20240528-09:20:52.11111="
-      "983532-321=138=10055=NVDA40=154=160=20240528-09:20:52.00410="
-      "017"};
+  std::cout << "Message: " << fix_buffer.Data() << "\n";
 
   int nbytes_s = static_cast<int>(
-      send(client_socket_fd, buffer.data(), sizeof(buffer), 0));
+      send(client_socket_fd, fix_buffer.Data(), fix_buffer.Size(), 0));
+  // send(client_socket_fd, msg_bldr.Data(), msg_bldr.Size(), 0));
 
   if (nbytes_s < 0) {
     std::cerr << "FIXNetworkHandler failed to send: " << strerror(errno)
@@ -113,39 +109,3 @@ void FIXNetworkHandler::ReceiveMessage(const int client_socket_fd) {
 
   std::cout << "Received from Test Server: " << in_buffer.data() << "\n";
 }
-/*
-  const int kBufferSize{2048};
-  std::array<char, kBufferSize> buffer{};
-  std::array<char, kBufferSize> in_buffer{};
-  FIXMessageBuilder fix_msg_bldr;
-  sbe::MessageHeader hdr;
-  sbe::NewOrderSingle new_order_single;
-
-  std::size_t encode_hdr_len{fix_msg_bldr.EncodeHeader(
-      hdr, new_order_single, buffer.data(), 0, sizeof(buffer))};
-
-  std::size_t encode_msg_len{fix_msg_bldr.EncodeMessage(
-      new_order_single, buffer.data(), hdr.encodedLength(), sizeof(buffer))};
-
-  std::cout << "Encoded Lengths are " << encode_hdr_len << " + "
-            << encode_msg_len << "\n";
-
-  // IMPROVEMENT: need to send message over the wire
-  int nbytes_s =
-      static_cast<int>(send(client_socket_fd, new_order_single.buffer(),
-                            new_order_single.bufferLength(), 0));
-
-  if (nbytes_s < 0) {
-    std::cerr << "FIXNetworkHandler failed to send message to client: "
-              << strerror(errno) << "\n";
-  }
-
-  int nbytes_r = static_cast<int>(
-      recv(client_socket_fd, &in_buffer, sizeof(in_buffer), 0));
-
-  if (nbytes_r < 0) {
-    std::cerr
-        << "FIXNetworkHandler failed to receive message from test server: "
-        << strerror(errno) << "\n";
-  }
-*/

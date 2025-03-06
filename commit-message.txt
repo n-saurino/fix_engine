@@ -1,20 +1,17 @@
-feat(infra): Refactor test server setup and implement initial FIXMessageBuilder
+feat(fix-message): Implement CRTP-based FIXMessage framework and initial messages
 
-Updated project infrastructure by separating the Test Server into its own repository and Docker container, enabling deployment via `docker-compose`. Established a dedicated Docker network for FIX client-server communication. Additionally, implemented a naive `FIXMessageBuilder` and successfully sent a Logon message to the FIX Test Server running QuickFIX. Abandoning FIX SBE for now in favor of standard FIX due to broader support in testing environments.
+Designed and implemented a FIXMessage framework using Curiously Recurring Template Pattern (CRTP) to achieve compile-time polymorphism, improving efficiency and type safety. Successfully constructed Logon and NewOrderSingle FIX messages, setting the foundation for further message handling improvements.
 
 Changes:
-- Updated `clang-tidy` configuration to better conform to Google's C++ style guide.
-- Moved Test Server to a separate repository and Docker container.
-- Deployed Test Server using `docker-compose`.
-- Created a dedicated Docker network for FIX client-server communication.
-- Removed FIX Server files from the FIX Client Engine.
-- Implemented a naive `FIXMessageBuilder` for initial message construction.
-- Successfully deployed the Test Server with QuickFIX.
-- Sent a Logon message to the FIX Test Server, confirming communication.
-- Abandoned FIX SBE for now in favor of standard FIX for better testing support.
+- Implemented a CRTP-based FIXMessage framework for compile-time polymorphism.
+- Created and validated Logon and NewOrderSingle FIX messages.
+- Established a structured approach for building and extending FIX message types.
 
 Next steps:
-- Develop a more robust system for building and managing FIX messages across multiple types (Logon, Logout, NewOrderSingle, etc.).
-- Begin benchmarking message-building performance using Google Benchmark.
+- Implement validation checks to prevent malformed messages and buffer overflows.
+- Develop a memory pool for `FIXBuffer` objects to improve memory efficiency.
+- Complete implementations for remaining core FIX messages (Heartbeat, Logout, etc.).
+- Build the FIX Message Parser for structured message interpretation.
+- Optimize FIX message construction using `memcpy` and formatting tricks for performance gains.
 
 Authored and reviewed by: Nigel Saurino

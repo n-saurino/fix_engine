@@ -1,0 +1,8 @@
+* Setup a FIXMessage framework using CRTP to achieve compile-time polymorphism
+* Created successful Logon and NewOrderSingle FIX Messages
+* To do:
+  * Validation checks to avoid malformed messages or buffer overflow
+  * Memory pool for FIXBuffer objects
+  * Finish the remaining basic FIX message implementations (Heartbeat, Logout...)
+  * Build the FIX Message Parser
+  * Optimize FIX Message Construction with memcpy and formatting tricks

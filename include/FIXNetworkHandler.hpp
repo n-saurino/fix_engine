@@ -7,15 +7,17 @@
 #include <cstring>
 #include <iostream>
 
+#include "FIXLogon.hpp"
 #include "FIXMessageBuilder.hpp"
 #include "FIXMessageParser.hpp"
+#include "FIXNewOrderSingle.hpp"
 
 class FIXNetworkHandler {
  public:
   FIXNetworkHandler(/* args */);
   void Test(const char* test_type, int client_socket_fd);
   void Start();
-  static void SendLogon(/* Message, */ const int client_socket_fd);
+  static void Send(FIXBuffer& buffer, const int client_socket_fd);
   static void SendMessage(/* Message, */ const int client_socket_fd);
   static void ReceiveMessage(const int client_socket_fd);
 
