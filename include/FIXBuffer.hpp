@@ -12,7 +12,7 @@ class FIXBuffer {
   // IMPROVEMENT: Let's find a way to use memcpy without snprintf. This is
   // redundant.
   void Append(const int tag, const char* val) {
-    char tag_str[10];
+    char tag_str[10]{};
     int tag_len{snprintf(tag_str, sizeof(tag_str), "%d=", tag)};
     memcpy(buffer_ + len_, tag_str, tag_len);
     len_ += tag_len;
@@ -28,12 +28,12 @@ class FIXBuffer {
   // IMPROVEMENT: Let's find a way to use memcpy without snprintf. This is
   // redundant.
   void Append(const int tag, const int val) {
-    char tag_str[10];
+    char tag_str[10]{};
     int tag_len{snprintf(tag_str, sizeof(tag_str), "%d=", tag)};
     memcpy(buffer_ + len_, tag_str, tag_len);
     len_ += tag_len;
 
-    char val_str[10];
+    char val_str[10]{};
     int val_len{snprintf(val_str, sizeof(val_str), "%d", val)};
     memcpy(buffer_ + len_, val_str, val_len);
     len_ += val_len;
@@ -89,7 +89,7 @@ class FIXBuffer {
 
  private:
   static constexpr size_t kCapacity{512};
-  char buffer_[kCapacity];
+  char buffer_[kCapacity]{};
   size_t len_{};
   size_t body_len_pos_{};
 };

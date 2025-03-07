@@ -103,7 +103,7 @@ void FIXNetworkHandler::ReceiveMessage(char (&buffer)[1024],
               << strerror(errno) << "\n";
   }
 
-  std::cout << "Received from Test Server: " << buffer << "\n";
+  std::cout << "Server Response: " << buffer << "\n";
 }
 
 auto FIXNetworkHandler::GetSocket(const int requested_socket) const -> const

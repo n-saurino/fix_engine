@@ -3,12 +3,17 @@
 #include "FIXMessage.hpp"
 #include "FIXNetworkHandler.hpp"
 #include "Order.hpp"
+#include "SampleOrders.hpp"
 #include "unordered_map"
 
 class FIXMessageTest : public ::testing::Test {
  protected:
   FIXNetworkHandler handler_;
   FIXBuffer fix_buffer_;
+  SampleNewOrder orig_order_;
+  SampleCancelOrder cancel_order_;
+  SampleCancelReplaceOrder cancel_replace_order_;
+
   void SetUp() override {
     // Setup code here, e.g., initialize network handler
     handler_.Start();
@@ -21,7 +26,7 @@ class FIXMessageTest : public ::testing::Test {
 
   auto SendMessageAndGetResponse(FIXBuffer& message) -> std::string {
     handler_.Send(message, handler_.GetSocket(0));
-    char buffer[1024];
+    char buffer[1024]{};
     handler_.ReceiveMessage(buffer, handler_.GetSocket(0));
     return static_cast<std::string>(buffer);
   }
@@ -39,22 +44,9 @@ TEST_F(FIXMessageTest, TestNewOrderSingle) {
 
   // --- Step 2: New Order Single ---
   fix_buffer_.Reset();
-  Order origOrder;
-  // Populate the test order.
-  std::strncpy(origOrder.cl_ord_id_, "CLORDID001",
-               sizeof(origOrder.cl_ord_id_));
-  // For a new order, orig_cl_ord_id_ may be empty.
-  std::strncpy(origOrder.orig_cl_ord_id_, "",
-               sizeof(origOrder.orig_cl_ord_id_));
-  std::strncpy(origOrder.symbol_, "NVDA", sizeof(origOrder.symbol_));
-  origOrder.side_ = 1;         // '1' for Buy.
-  origOrder.order_qty_ = 100;  // Order quantity.
-  origOrder.ord_type_ = 2;     // '2' for Limit order.
-  origOrder.price_ = 99.99;    // Limit price.
-  std::strncpy(origOrder.transact_time_, "20250306-12:34:56.000000",
-               sizeof(origOrder.transact_time_));
+  SampleNewOrder sample_new_order;
 
-  FIXNewOrderSingle newOrder(fix_buffer_, origOrder);
+  FIXNewOrderSingle newOrder(fix_buffer_, sample_new_order);
   newOrder.Serialize();  // This calls SerializeDerived() internally.
   std::string newOrderResponse = SendMessageAndGetResponse(fix_buffer_);
   std::cerr << "NewOrderSingle Response: " << newOrderResponse << "\n";
@@ -108,22 +100,9 @@ TEST_F(FIXMessageTest, TestOrderCancelRequest) {
 
   // --- Step 2: New Order Single ---
   fix_buffer_.Reset();
-  Order origOrder;
-  // Populate the test order.
-  std::strncpy(origOrder.cl_ord_id_, "CLORDID001",
-               sizeof(origOrder.cl_ord_id_));
-  // For a new order, orig_cl_ord_id_ may be empty.
-  std::strncpy(origOrder.orig_cl_ord_id_, "",
-               sizeof(origOrder.orig_cl_ord_id_));
-  std::strncpy(origOrder.symbol_, "NVDA", sizeof(origOrder.symbol_));
-  origOrder.side_ = 1;         // '1' for Buy.
-  origOrder.order_qty_ = 100;  // Order quantity.
-  origOrder.ord_type_ = 2;     // '2' for Limit order.
-  origOrder.price_ = 99.99;    // Limit price.
-  std::strncpy(origOrder.transact_time_, "20250306-12:34:56.000000",
-               sizeof(origOrder.transact_time_));
+  SampleNewOrder sample_new_order{};
 
-  FIXNewOrderSingle newOrder(fix_buffer_, origOrder);
+  FIXNewOrderSingle newOrder(fix_buffer_, sample_new_order);
   newOrder.Serialize();  // This calls SerializeDerived() internally.
   std::string newOrderResponse = SendMessageAndGetResponse(fix_buffer_);
   std::cerr << "NewOrderSingle Response: " << newOrderResponse << "\n";
@@ -131,17 +110,9 @@ TEST_F(FIXMessageTest, TestOrderCancelRequest) {
 
   // --- Step 2: Order Cancel Request ---
   fix_buffer_.Reset();
-  Order testOrder;
-  // Populate the test order.
-  std::strncpy(testOrder.cl_ord_id_, "CLORDID002",
-               sizeof(testOrder.cl_ord_id_));
-  std::strncpy(testOrder.orig_cl_ord_id_, "CLORDID001",
-               sizeof(testOrder.orig_cl_ord_id_));
-  std::strncpy(testOrder.symbol_, "NVDA", sizeof(testOrder.symbol_));
-  testOrder.side_ = 1;         // '1' for Buy.
-  testOrder.order_qty_ = 100;  // Order quantity.
+  SampleCancelOrder sample_cancel_order{};
 
-  FIXOrderCancelRequest cancelRequest(fix_buffer_, testOrder);
+  FIXOrderCancelRequest cancelRequest(fix_buffer_, sample_cancel_order);
   cancelRequest.Serialize();
   std::string cancelRequestResponse = SendMessageAndGetResponse(fix_buffer_);
   std::cerr << "OrderCancelRequest Response: " << cancelRequestResponse << "\n";
@@ -168,22 +139,10 @@ TEST_F(FIXMessageTest, TestOrderCancelReplaceRequest) {
 
   // --- Step 2: New Order Single ---
   fix_buffer_.Reset();
-  Order origOrder;
-  // Populate the test order.
-  std::strncpy(origOrder.cl_ord_id_, "CLORDID001",
-               sizeof(origOrder.cl_ord_id_));
-  // For a new order, orig_cl_ord_id_ may be empty.
-  std::strncpy(origOrder.orig_cl_ord_id_, "",
-               sizeof(origOrder.orig_cl_ord_id_));
-  std::strncpy(origOrder.symbol_, "NVDA", sizeof(origOrder.symbol_));
-  origOrder.side_ = 1;         // '1' for Buy.
-  origOrder.order_qty_ = 100;  // Order quantity.
-  origOrder.ord_type_ = 2;     // '2' for Limit order.
-  origOrder.price_ = 99.99;    // Limit price.
-  std::strncpy(origOrder.transact_time_, "20250306-12:34:56.000000",
-               sizeof(origOrder.transact_time_));
 
-  FIXNewOrderSingle newOrder(fix_buffer_, origOrder);
+  SampleNewOrder sample_new_order_{};
+
+  FIXNewOrderSingle newOrder(fix_buffer_, sample_new_order_);
   newOrder.Serialize();  // This calls SerializeDerived() internally.
   std::string newOrderResponse = SendMessageAndGetResponse(fix_buffer_);
   std::cerr << "NewOrderSingle Response: " << newOrderResponse << "\n";
@@ -191,19 +150,11 @@ TEST_F(FIXMessageTest, TestOrderCancelReplaceRequest) {
 
   // --- Step 2: Order Cancel Replace Request ---
   fix_buffer_.Reset();
-  Order testOrder;
-  // Populate the test order.
-  std::strncpy(testOrder.cl_ord_id_, "CLORDID003",
-               sizeof(testOrder.cl_ord_id_));
-  std::strncpy(testOrder.orig_cl_ord_id_, "CLORDID001",
-               sizeof(testOrder.orig_cl_ord_id_));
-  std::strncpy(testOrder.symbol_, "NVDA", sizeof(testOrder.symbol_));
-  testOrder.side_ = 1;         // '1' for Buy.
-  testOrder.order_qty_ = 200;  // New order quantity.
-  testOrder.ord_type_ = 2;     // '2' for Limit order.
-  testOrder.price_ = 98.99;    // New limit price.
 
-  FIXOrderCancelReplaceRequest replaceRequest(fix_buffer_, testOrder);
+  SampleCancelReplaceOrder sample_cancel_replace_order{};
+
+  FIXOrderCancelReplaceRequest replaceRequest(fix_buffer_,
+                                              sample_cancel_replace_order);
   replaceRequest.Serialize();
   std::string replaceRequestResponse = SendMessageAndGetResponse(fix_buffer_);
   std::cerr << "OrderCancelReplaceRequest Response: " << replaceRequestResponse
@@ -245,7 +196,6 @@ TEST_F(FIXMessageTest, TestTestRequest) {
   std::cerr << "Logout Response: " << logoutResponse << "\n";
   ASSERT_GE(logoutResponse.size(), 1);
 }
-
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
