@@ -1,15 +1,29 @@
-chore(work-in-progress): End of day push for continuation from another setup
+chore(repo): Major refactor and infrastructure improvements for FIX engine development
 
-Pushing the latest changes to ensure work can continue from another machine if needed. This is not a finalized checkpoint, but a work-in-progress commit to preserve current progress.
+Refactored the repository structure and core components to establish a scalable foundation for continued FIX engine development. Extracted the test server into a standalone repository and containerized it for modularity, enabling independent testing and future enhancements. Established a dedicated Docker network for efficient client-server communication. Introduced a compile-time polymorphic FIXMessage framework leveraging CRTP, focusing on performance and extensibility. Additionally, initiated work on order structuring, streamlined network handling, and deprecated FIX SBE due to insufficient test support. This commit serves as a necessary checkpoint to prevent excessive scope expansion and ensure incremental, testable development.
 
 Changes:
-- Latest in-progress modifications and ongoing development work.
+- Infrastructure improvements:
+  - Separated the test server into its own Docker container running QuickFIX.
+  - Created a dedicated Docker network for seamless FIX client-server communication.
+  - Moved test server to a separate repository: https://github.com/n-saurino/fix_test_server.
+
+- Message framework and network updates:
+  - Designed a FIXMessage framework using CRTP to achieve compile-time polymorphism.
+  - Implemented key client-side FIX messages: Logon, Logout, Heartbeat, TestRequest, NewOrderSingle, OrderCancelRequest, and OrderCancelReplaceRequest.
+  - Introduced FIXBuffer for raw message storage, though identified performance concerns due to memory overhead and indirection.
+  - Simplified the network handler to transmit FIXBuffer contents directly over the wire.
+
+- Codebase refinements and technical debt management:
+  - Removed server-related files from the FIX engine project to maintain a strict client-side focus.
+  - Archived FIX SBE functionality due to lack of test support, deferring potential reintroduction until the core system is stable.
+  - Introduced a lightweight Order struct as a prototype for Order Management System (OMS) integration.
+  - Added a GTest-based testing framework to validate message construction and client-server communication.
 
 Next steps:
-- Implement validation checks to prevent malformed messages and buffer overflows.
-- Develop a memory pool for `FIXBuffer` objects to improve memory efficiency.
-- Complete implementations for remaining core FIX messages (Heartbeat, Logout, etc.).
-- Build the FIX Message Parser for structured message interpretation.
-- Optimize FIX message construction using `memcpy` and formatting tricks for performance gains.
+- Implement a memory pool for efficient message buffer management to mitigate FIXBuffer overhead.
+- Develop a lock-free queue to improve message processing throughput.
+- Optimize message batching for efficient encoding and transmission.
+- Expand GTest coverage to validate additional FIX messages and edge cases.
 
 Authored and reviewed by: Nigel Saurino

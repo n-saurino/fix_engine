@@ -1,8 +1,18 @@
-* Setup a FIXMessage framework using CRTP to achieve compile-time polymorphism
-* Created successful Logon and NewOrderSingle FIX Messages
-* To do:
-  * Validation checks to avoid malformed messages or buffer overflow
-  * Memory pool for FIXBuffer objects
-  * Finish the remaining basic FIX message implementations (Heartbeat, Logout...)
-  * Build the FIX Message Parser
-  * Optimize FIX Message Construction with memcpy and formatting tricks
+Changes:
+* So many changes that I need to just checkpoint this branch so that I don't end up taking on too much all at once.
+* I split out the test server into its own docker container and set it up to run QuickFIX. 
+* I then created a docker network and connected my FIX engine and my test server containers on it.
+* The test server is in its own repository here: https://github.com/n-saurino/fix_test_server
+* I then implemented a basic FIXMessage framework relying on CRTP for compile-time polymorphism
+* I focused on the messages that would be sent from our client in this branch by creating the Logon, Logout, Heartbeat, TestRequest, NewOrderSingle, OrderCancelRequest, and OrderCancelReplaceRequest messages.
+* These derived class fix messages will all contain a FIXBuffer which manages a raw char buffer. This class has a drag on performance and will need to be refactored because of overhead from memory and indirection associated with the helper functions and the additional member variables.
+* I then created a basic Order struct to work as a prototype for the objects we'd be receiving from the trade desk's Order Management System.
+* I removed all Serverfiles from the FIX engine project so that we are now only running the client
+* I archived the FIX SBE functionality because I had a hard time finding test support for the FIX SBE protocol.
+* FIX SBE could be a further enhancement once I have a base implementation of this project up and running.
+* I simplified the Network Handler to take a FIXBuffer object and send it's contents on the wire.
+* Added a basic testing framework with GTest to verify Message construction and client-server communication.
+Up Next:
+* Implement the Memory Pool for the message buffers.
+* Implement a lock-free queue for the messages.
+* Explore ways to batch messages for codec and transmission on the wire.
