@@ -1,6 +1,19 @@
 #pragma once
+#include <string_view>
+
 #include "FIXBuffer.hpp"
 #include "FIXMessageBase.hpp"
+
+struct CompId {
+  // string_view instead of char[] so we can use constexpr for compile time
+  // evaluation
+  // constexpr static inline std::string_view client_comp_id_ = "FIX_CLIENT";
+  // constexpr static inline std::string_view server_comp_id_ = "FIX_SERVER";
+  // constexpr static inline std::string_view account_id_ = "Nigel";
+  constexpr static inline char client_comp_id_[16] = "FIX_CLIENT";
+  constexpr static inline char server_comp_id_[16] = "FIX_SERVER";
+  constexpr static inline char account_id_[16] = "Nigel";
+};
 
 template <typename Derived>
 class FIXMessage : public FIXMessageBase {

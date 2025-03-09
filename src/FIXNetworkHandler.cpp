@@ -69,7 +69,7 @@ void FIXNetworkHandler::Start() {
 void FIXNetworkHandler::Stop() {
   std::cout << "Closing client sockets...\n";
   for (auto socket : sockets_) {
-    if (socket) {
+    if (socket != -1) {
       close(socket);
     }
   }

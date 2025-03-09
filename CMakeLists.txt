@@ -1,10 +1,12 @@
-cmake_minimum_required(VERSION 3.5.0)
+cmake_minimum_required(VERSION 3.16)
 project(main VERSION 0.1.0 LANGUAGES C CXX)
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 20)  # Use C++20, you can change this to 11, 14, 20, etc.
 set(CMAKE_CXX_STANDARD_REQUIRED True)  # Ensure the compiler enforces the standard
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
+if(NOT CMAKE_CXX_COMPILER)
+    set(CMAKE_CXX_COMPILER /usr/bin/g++)
+endif()
 set(CMAKE_CXX_EXTENSIONS OFF)  # Disable compiler-specific extensions
 
 # Explicitly enable exceptions for GCC/Clang

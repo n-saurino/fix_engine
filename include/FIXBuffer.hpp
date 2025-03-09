@@ -12,6 +12,7 @@ class FIXBuffer {
   // IMPROVEMENT: Let's find a way to use memcpy without snprintf. This is
   // redundant.
   void Append(const int tag, const char* val) {
+    // Not handling bounds checking due to speed drag from branch misprediction
     char tag_str[10]{};
     int tag_len{snprintf(tag_str, sizeof(tag_str), "%d=", tag)};
     memcpy(buffer_ + len_, tag_str, tag_len);
@@ -28,6 +29,7 @@ class FIXBuffer {
   // IMPROVEMENT: Let's find a way to use memcpy without snprintf. This is
   // redundant.
   void Append(const int tag, const int val) {
+    // Not handling bounds checking due to speed drag from branch misprediction
     char tag_str[10]{};
     int tag_len{snprintf(tag_str, sizeof(tag_str), "%d=", tag)};
     memcpy(buffer_ + len_, tag_str, tag_len);
@@ -50,6 +52,9 @@ class FIXBuffer {
     // Convert seconds to UTC time (thread-safe version)
     struct tm utc_tm;
     gmtime_r(&ts.tv_sec, &utc_tm);
+
+    // IMPROVEMENT: Consider bounds checking to avoid buffer overflow
+    // However, this is in the hot path and could produce branch mispredictions
 
     // Format: YearMonthDay-Hour:Minute:Second.microseconds
     // Note: ts.tv_nsec / 1000 converts nanoseconds to microseconds.

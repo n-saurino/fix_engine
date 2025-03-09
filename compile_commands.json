@@ -1,42 +1,22 @@
 [
-{
-  "directory": "/workspace",
-  "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/main.cpp.o -c /workspace/src/main.cpp",
-  "file": "/workspace/src/main.cpp"
-},
-{
-  "directory": "/workspace",
-  "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/Server.cpp.o -c /workspace/src/Server.cpp",
-  "file": "/workspace/src/Server.cpp"
-},
-{
-  "directory": "/workspace",
-  "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/Client.cpp.o -c /workspace/src/Client.cpp",
-  "file": "/workspace/src/Client.cpp"
-},
-{
-  "directory": "/workspace",
-  "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/FIXEngine.cpp.o -c /workspace/src/FIXEngine.cpp",
-  "file": "/workspace/src/FIXEngine.cpp"
-},
-{
-  "directory": "/workspace",
-  "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/FIXNetworkHandler.cpp.o -c /workspace/src/FIXNetworkHandler.cpp",
-  "file": "/workspace/src/FIXNetworkHandler.cpp"
-},
-{
-  "directory": "/workspace",
-  "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/FIXMessageParser.cpp.o -c /workspace/src/FIXMessageParser.cpp",
-  "file": "/workspace/src/FIXMessageParser.cpp"
-},
-{
-  "directory": "/workspace",
-  "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/NetworkProfiler.cpp.o -c /workspace/src/NetworkProfiler.cpp",
-  "file": "/workspace/src/NetworkProfiler.cpp"
-},
-{
-  "directory": "/workspace",
-  "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/PerformanceLogger.cpp.o -c /workspace/src/PerformanceLogger.cpp",
-  "file": "/workspace/src/PerformanceLogger.cpp"
-}
+  {
+    "directory": "/workspace",
+    "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/main.cpp.o -c /workspace/src/main.cpp",
+    "file": "/workspace/src/main.cpp"
+  },
+  {
+    "directory": "/workspace",
+    "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/FIXEngine.cpp.o -c /workspace/src/FIXEngine.cpp",
+    "file": "/workspace/src/FIXEngine.cpp"
+  },
+  {
+    "directory": "/workspace",
+    "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/FIXNetworkHandler.cpp.o -c /workspace/src/FIXNetworkHandler.cpp",
+    "file": "/workspace/src/FIXNetworkHandler.cpp"
+  },
+  {
+    "directory": "/workspace",
+    "command": "/usr/bin/g++  -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -I/workspace/include -I/workspace/generated/sbe   -fexceptions   -std=c++2a -o CMakeFiles/main.dir/src/FIXMessageParser.cpp.o -c /workspace/src/FIXMessageParser.cpp",
+    "file": "/workspace/src/FIXMessageParser.cpp"
+  }
 ]

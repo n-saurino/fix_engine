@@ -1,29 +1,19 @@
-chore(repo): Major refactor and infrastructure improvements for FIX engine development
+refactor(core): Optimize FIX message construction and improve system reliability
 
-Refactored the repository structure and core components to establish a scalable foundation for continued FIX engine development. Extracted the test server into a standalone repository and containerized it for modularity, enabling independent testing and future enhancements. Established a dedicated Docker network for efficient client-server communication. Introduced a compile-time polymorphic FIXMessage framework leveraging CRTP, focusing on performance and extensibility. Additionally, initiated work on order structuring, streamlined network handling, and deprecated FIX SBE due to insufficient test support. This commit serves as a necessary checkpoint to prevent excessive scope expansion and ensure incremental, testable development.
+Refactored core components of the FIX message construction pipeline to improve efficiency, safety, and maintainability. Introduced a structured approach for CompID and account name lookup to accelerate message building along the hotpath. Enhanced buffer handling to mitigate potential overflow risks. Improved concurrency readiness by making the sequence number generator atomic for future multi-threaded workloads. Also resolved build inconsistencies by aligning GTest and dependency versions between test and application builds.
 
 Changes:
-- Infrastructure improvements:
-  - Separated the test server into its own Docker container running QuickFIX.
-  - Created a dedicated Docker network for seamless FIX client-server communication.
-  - Moved test server to a separate repository: https://github.com/n-saurino/fix_test_server.
-
-- Message framework and network updates:
-  - Designed a FIXMessage framework using CRTP to achieve compile-time polymorphism.
-  - Implemented key client-side FIX messages: Logon, Logout, Heartbeat, TestRequest, NewOrderSingle, OrderCancelRequest, and OrderCancelReplaceRequest.
-  - Introduced FIXBuffer for raw message storage, though identified performance concerns due to memory overhead and indirection.
-  - Simplified the network handler to transmit FIXBuffer contents directly over the wire.
-
-- Codebase refinements and technical debt management:
-  - Removed server-related files from the FIX engine project to maintain a strict client-side focus.
-  - Archived FIX SBE functionality due to lack of test support, deferring potential reintroduction until the core system is stable.
-  - Introduced a lightweight Order struct as a prototype for Order Management System (OMS) integration.
-  - Added a GTest-based testing framework to validate message construction and client-server communication.
+- Cleaned up `compile_commands.json` by removing outdated references.
+- Added a `CompID` struct for efficient identifier lookup in FIX message construction.
+- Ensured buffer safety by appending a trailing null character to `Order` buffers.
+- Updated the sequence number generator to use `std::atomic` for thread safety.
+- Fixed version mismatches and GTest conflicts between test and application builds.
 
 Next steps:
-- Implement a memory pool for efficient message buffer management to mitigate FIXBuffer overhead.
-- Develop a lock-free queue to improve message processing throughput.
-- Optimize message batching for efficient encoding and transmission.
-- Expand GTest coverage to validate additional FIX messages and edge cases.
+- Refactor `Append` functions to improve tag handling performance.
+- Optimize `FIXBuffer` by leveraging free functions and direct raw buffer access.
+- Implement a memory pool for `FIXBuffer` to reduce dynamic allocations.
+- Design a lock-free queue for efficient message processing.
+- Build a high-performance FIX message parser to handle inbound server messages.
 
 Authored and reviewed by: Nigel Saurino
