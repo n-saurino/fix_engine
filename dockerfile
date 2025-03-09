@@ -31,6 +31,7 @@ RUN apt-get update && \
     libxml2-dev \
     libjsoncpp-dev \
     libgtest-dev \
+    libbenchmark-dev \
     clang-tidy \
     clang-format \
     doxygen \
@@ -74,17 +75,6 @@ RUN wget https://archives.boost.io/release/1.85.0/source/boost_1_85_0.tar.gz && 
     cd .. && \
     rm -rf boost_1_85_0 boost_1_85_0.tar.gz
 
-# Install Google Benchmark from Source 
-RUN git clone https://github.com/google/benchmark.git && \
-cd benchmark && \
-git checkout v1.8.3 && \  # Adjust version if needed
-cmake -E make_directory build && \
-cmake -DCMAKE_BUILD_TYPE=Release -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON -S . -B build && \
-cmake --build build --config Release && \
-cmake --install build && \
-cd .. && \
-rm -rf benchmark
-
 # Copy project files into the container
 COPY . /workspace
 
@@ -96,8 +86,8 @@ RUN export CXXFLAGS="-fexceptions" && \
     export CFLAGS="-fexceptions"
 
 # Configure and build the project
-RUN cmake -S . -B build && \
-    cmake --build build
+#RUN cmake -S . -B build && \
+#    cmake --build build
 
 # Default command to keep the container running
 CMD ["/bin/bash"]

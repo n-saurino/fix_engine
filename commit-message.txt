@@ -1,14 +1,16 @@
-chore(work-in-progress): End of day push for continuation from another setup
+feat(core): Implement basic memory pool and begin benchmarking framework
 
-Pushing the latest changes to ensure work can continue from another machine if needed. This is not a finalized checkpoint, but a work-in-progress commit to preserve current progress.
+Introduced a fixed-size memory pool to optimize memory allocation for `FIXBuffer` objects. The memory pool manages a preallocated set of blocks and provides direct access to its memory via character pointers, reducing dynamic allocations. Additionally, began integrating a benchmarking framework as part of ongoing performance measurement efforts.
 
 Changes:
-- Latest in-progress modifications and ongoing development work.
+- Built a basic memory pool with a fixed block size and block count.
+- Provided direct character pointer access to memory managed by the pool.
+- Updated `FIXBuffer` to construct objects with character pointers referencing memory pool blocks.
+- Accidentally began work on the benchmarking framework, which is included in this commit.
 
 Next steps:
 - Refactor `Append` functions to improve tag handling performance.
 - Optimize `FIXBuffer` by leveraging free functions and direct raw buffer access.
-- Implement a memory pool for `FIXBuffer` to reduce dynamic allocations.
 - Design a lock-free queue for efficient message processing.
 - Build a high-performance FIX message parser to handle inbound server messages.
 

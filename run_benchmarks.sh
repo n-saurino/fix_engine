@@ -6,7 +6,7 @@ set -o pipefail  # Capture pipeline errors
 # Define variables
 BUILD_DIR="build"
 BENCHMARK_DIR="./benchmarks"
-LOG_FILE="benchmark_results.log"
+LOG_FILE="/workspace/logs/benchmarks/benchmark_results.log"
 
 # Check if the benchmark directory exists
 if [ ! -d "$BENCHMARK_DIR" ]; then
@@ -35,7 +35,7 @@ cmake --build "$BUILD_DIR" -- -j$(nproc)
 # Run all benchmark executables in /benchmarks/
 echo "Running Google Benchmarks..."
 for benchmark in "$BUILD_DIR/benchmarks/"*; do
-  if [[ -x "$benchmark" ]]; then
+  if [[ -f "$benchmark" && -x "$benchmark" ]]; then  # Fix syntax
     echo "Executing: $benchmark"
     "$benchmark" | tee -a "$LOG_FILE"
     echo "-----------------------------------" >> "$LOG_FILE"
