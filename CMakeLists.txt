@@ -45,3 +45,5 @@ target_link_libraries(main PRIVATE ${Boost_LIBRARIES} GTest::GTest GTest::Main p
 # Add this at the end of your CMakeLists.txt
 enable_testing()
 add_subdirectory(tests)
+
+add_subdirectory(benchmarks)
