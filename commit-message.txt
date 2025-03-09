@@ -1,16 +1,19 @@
-fix(network): Improve error handling and buffer safety in socket operations
+refactor(core): Optimize FIX message construction and improve system reliability
 
-Added basic error catching for `send()` and `recv()` to improve robustness in network communication. Fixed a buffer overflow issue in `recv()` within the Network Profiler, enhancing reliability and stability in benchmarking.
+Refactored core components of the FIX message construction pipeline to improve efficiency, safety, and maintainability. Introduced a structured approach for CompID and account name lookup to accelerate message building along the hotpath. Enhanced buffer handling to mitigate potential overflow risks. Improved concurrency readiness by making the sequence number generator atomic for future multi-threaded workloads. Also resolved build inconsistencies by aligning GTest and dependency versions between test and application builds.
 
 Changes:
-- Implemented basic error handling for `send()` and `recv()` to prevent failures from propagating.
-- Fixed buffer overflow correction in `recv()` in the Network Profiler.
+- Cleaned up `compile_commands.json` by removing outdated references.
+- Added a `CompID` struct for efficient identifier lookup in FIX message construction.
+- Ensured buffer safety by appending a trailing null character to `Order` buffers.
+- Updated the sequence number generator to use `std::atomic` for thread safety.
+- Fixed version mismatches and GTest conflicts between test and application builds.
 
 Next steps:
-- Implement basic FIX SBE message transmission between the Engine and test server within the next 24 hours.
-- Continue refining exception handling in the socket programming module.
-- Implement a performance logging system to track optimization improvements.
-- Further optimize message handling for performance and reliability.
-- Investigate and fix rare occurrences of negative minimum latencies in latency benchmarking.
+- Refactor `Append` functions to improve tag handling performance.
+- Optimize `FIXBuffer` by leveraging free functions and direct raw buffer access.
+- Implement a memory pool for `FIXBuffer` to reduce dynamic allocations.
+- Design a lock-free queue for efficient message processing.
+- Build a high-performance FIX message parser to handle inbound server messages.
 
 Authored and reviewed by: Nigel Saurino

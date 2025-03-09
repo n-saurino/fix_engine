@@ -1,9 +1,12 @@
 #pragma once
+#include <array>
+#include <cstring>
+#include <iostream>
 
 class FIXMessageParser {
- public:
-  FIXMessageParser(/* args */) = default;
-
  private:
   /* data */
+ public:
+  FIXMessageParser(/* args */);
+  void Parse();
 };

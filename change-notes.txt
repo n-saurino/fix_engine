@@ -1,0 +1,13 @@
+Changes:
+* Removed old files from compile_commands.json
+* Created a struct for CompIds and account name for quick lookup in FIXMessage construction along the hotpath
+* added a trailing null character to the buffers in Order in case the char buffers passed in are longer than the member variable buffer size
+* Updated the sequence number generator to an atomic so that it is thread safe for the future
+* Fixed version and gtest conflicts between the test build and the application build
+
+Next:
+* Refactor Append functions to optimize tag handling
+* Explore FIXBuffer optimizations by using free functions and direct raw buffer access
+* Create a memory pool for the FIXBuffers
+* Create a lock-free queue for the FIXMessages
+* Create a message parser to parse messages received from the FIX Server

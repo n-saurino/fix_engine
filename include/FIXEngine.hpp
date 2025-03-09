@@ -1,5 +1,6 @@
 #pragma once
 #include "FIXNetworkHandler.hpp"
+#include "SampleOrders.hpp"
 
 class FIXEngine {
  public:
