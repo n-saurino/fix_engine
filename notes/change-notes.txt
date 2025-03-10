@@ -1,0 +1,5 @@
+Changes:
+* Removed kCapacity member variable from FIXBuffer to avoid confusion about memory model and who is responsible for freeing the memory block associated with a FIXBuffer
+* Fixed an OOB error in memory pool UpdateNextFreeIdx()
+* Removed redundant for loop from MemoryPool initialization
+* Added the Serialize function and benchmark::ClobberMemory() to make sure the writes to the FIXBuffer's raw char buffer aren't optimized away by the compiler.

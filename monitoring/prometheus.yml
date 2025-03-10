@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 10s  # Scrape benchmark results every 10 seconds
+
+scrape_configs:
+  - job_name: 'fix_engine_benchmarks'
+    static_configs:
+      - targets: ['localhost:9100']  # Node Exporter runs on port 9100
+    file_sd_configs:
+      - files:
+          - '/var/lib/node_exporter/textfile_collector/*.prom'  # Reads benchmark results

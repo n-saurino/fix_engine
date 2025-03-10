@@ -1,12 +1,9 @@
-refactor(memory): Simplify FIXBuffer memory model and improve memory pool reliability
+chore(work-in-progress): End of day push for continuation from another setup
 
-Refactored FIXBuffer to clarify ownership of memory by removing the `kCapacity` member variable, preventing confusion regarding memory allocation and deallocation. Fixed an out-of-bounds error in `MemoryPool::UpdateNextFreeIdx()`, improved memory pool initialization efficiency, and enhanced benchmarking reliability by introducing `Serialize` and `benchmark::ClobberMemory()` to prevent compiler optimizations.
+Pushing the latest changes to ensure work can continue from another machine if needed. This is not a finalized checkpoint, but a work-in-progress commit to preserve current progress.
 
 Changes:
-- Removed `kCapacity` member variable from `FIXBuffer` to eliminate ambiguity in memory ownership.
-- Fixed an out-of-bounds error in `MemoryPool::UpdateNextFreeIdx()`.
-- Removed redundant loop from `MemoryPool` initialization, improving efficiency.
-- Added `Serialize` function and `benchmark::ClobberMemory()` to ensure `FIXBuffer` writes are not optimized away by the compiler.
+- Latest in-progress modifications and ongoing development work.
 
 Next steps:
 - Refactor `Append` functions to improve tag handling performance.

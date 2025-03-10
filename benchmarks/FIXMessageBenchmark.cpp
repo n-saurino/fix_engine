@@ -3,6 +3,7 @@
 #include <cstring>
 #include <vector>
 
+#include "BenchmarkLogger.hpp"
 #include "FIXMessage.hpp"
 #include "FIXNewOrderSingle.hpp"
 #include "MemoryPool.hpp"
@@ -40,4 +41,7 @@ BENCHMARK_F(FIXMessageBenchmark, Benchmark_FIXMessageBuild)
   }
 }
 
-BENCHMARK_MAIN();
+BENCHMARK_REGISTER_F(FIXMessageBenchmark, Benchmark_FIXMessageBuild)
+    ->Repetitions(kTotalRuns);  // or add option --benchmark_repetitions=3
+
+// BENCHMARK_MAIN();
