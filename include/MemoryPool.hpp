@@ -14,9 +14,7 @@ class MemoryPool {
     }
 
     // initialize memory pool
-    for (int i{}; i < kMemPoolCapacity; ++i) {
-      memset(pool_ + i, '\0', 0);
-    }
+    memset(pool_, '\0', kMemPoolCapacity);
   }
 
   //   ~MemoryPool() = delete;
@@ -73,7 +71,7 @@ class MemoryPool {
   size_t curr_idx_{0};
 
   void UpdateNextFreeIdx() {
-    while (free_block_arr_[curr_idx_] && curr_idx_ < kTotalBlocks) {
+    while (curr_idx_ < kTotalBlocks && free_block_arr_[curr_idx_]) {
       ++curr_idx_;
     }
   }

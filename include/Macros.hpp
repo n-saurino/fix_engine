@@ -10,6 +10,7 @@
 inline auto ASSERT(bool condition, const std::string& msg) noexcept {
   if (UNLIKELY(!condition)) {
     std::cerr << msg << std::endl;
+    // throw std::runtime_error(msg);
     exit(EXIT_FAILURE);
   }
 }

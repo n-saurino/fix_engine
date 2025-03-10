@@ -1,12 +1,12 @@
-feat(core): Implement basic memory pool and begin benchmarking framework
+refactor(memory): Simplify FIXBuffer memory model and improve memory pool reliability
 
-Introduced a fixed-size memory pool to optimize memory allocation for `FIXBuffer` objects. The memory pool manages a preallocated set of blocks and provides direct access to its memory via character pointers, reducing dynamic allocations. Additionally, began integrating a benchmarking framework as part of ongoing performance measurement efforts.
+Refactored FIXBuffer to clarify ownership of memory by removing the `kCapacity` member variable, preventing confusion regarding memory allocation and deallocation. Fixed an out-of-bounds error in `MemoryPool::UpdateNextFreeIdx()`, improved memory pool initialization efficiency, and enhanced benchmarking reliability by introducing `Serialize` and `benchmark::ClobberMemory()` to prevent compiler optimizations.
 
 Changes:
-- Built a basic memory pool with a fixed block size and block count.
-- Provided direct character pointer access to memory managed by the pool.
-- Updated `FIXBuffer` to construct objects with character pointers referencing memory pool blocks.
-- Accidentally began work on the benchmarking framework, which is included in this commit.
+- Removed `kCapacity` member variable from `FIXBuffer` to eliminate ambiguity in memory ownership.
+- Fixed an out-of-bounds error in `MemoryPool::UpdateNextFreeIdx()`.
+- Removed redundant loop from `MemoryPool` initialization, improving efficiency.
+- Added `Serialize` function and `benchmark::ClobberMemory()` to ensure `FIXBuffer` writes are not optimized away by the compiler.
 
 Next steps:
 - Refactor `Append` functions to improve tag handling performance.

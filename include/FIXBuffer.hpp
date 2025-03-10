@@ -6,13 +6,16 @@
 #include <iostream>
 
 #include "MemoryPool.hpp"
+#include "Macros.hpp"
 
 /* IMPROVEMENT: could we build a std::array that maps all tags to their string
 equivalents and then memcpy those over. Then we just need to figure out how to
 efficiently convert an int to a char[] for the value*/
 class FIXBuffer {
  public:
-  explicit FIXBuffer(char* buffer) : buffer_{buffer} {}
+  explicit FIXBuffer(char* buffer) : buffer_{buffer} {
+    ASSERT(buffer_ != nullptr, "Char* buffer passed to FIXBuffer cannot be nullptr");
+  }
   // IMPROVEMENT: Let's find a way to use memcpy without snprintf. This is
   // redundant.
   void Append(const int tag, const char* val) {
@@ -97,7 +100,8 @@ class FIXBuffer {
   auto Size() -> size_t { return len_; }
 
  private:
-  static constexpr size_t kCapacity{512};
+  // will reinstate a capacity member variable if it's needed
+  // static constexpr size_t kCapacity{512};
   char* buffer_{};
   size_t len_{};
   size_t body_len_pos_{};
