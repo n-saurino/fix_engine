@@ -1,0 +1,5 @@
+* Code latency distribution should roughly follow a normal distribution.
+* The tighter distribution the better
+* To test for a normal distribution, we can do a mean-median test: [abs(mean - median) / max(mean, median)] < 0.01
+* Also track standard deviation for tightness of distribution
+* For tick to trade, start on reception of message from server and stop after trade successfully sent to the exchange 

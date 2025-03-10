@@ -72,6 +72,5 @@ Thumbs.db
 # Ignore debugging symbols
 *.dSYM
 
-#Ignore notetaking files
-change-notes.txt
-summary-notes.txt
+#Ignore notes folder
+/notes/

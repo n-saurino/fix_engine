@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(FIXMessagesTests)
+project(ProjectTests)
 
 # Find Google Test
 find_package(GTest REQUIRED)
@@ -12,18 +12,23 @@ set(SOURCE_FILES
   ../src/FIXEngine.cpp
   ../src/FIXNetworkHandler.cpp)
 
-# Add the test source files
+# Create separate test executables for each component
 add_executable(test_FIXMessages test_FIXMessages.cpp ${SOURCE_FILES})
+add_executable(test_MemoryPool test_MemoryPool.cpp ${SOURCE_FILES})
 
-# Add header file includes
+# Include directories for both test executables
 target_include_directories(test_FIXMessages PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/generated/sbe")
+target_include_directories(test_MemoryPool PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/generated/sbe")
 
-# Link the test executable with Google Test
+# Link test executables with Google Test and pthread
 target_link_libraries(test_FIXMessages PRIVATE GTest::gtest GTest::gtest_main pthread)
+target_link_libraries(test_MemoryPool PRIVATE GTest::gtest GTest::gtest_main pthread)
 
-# Register tests
+# Register tests separately
 include(GoogleTest)
 gtest_discover_tests(test_FIXMessages)
+gtest_discover_tests(test_MemoryPool)
 
-# Ensure the test executable is recognized by CTest
+# Ensure the test executables are recognized by CTest
 add_test(NAME FIXMessageTests COMMAND test_FIXMessages)
+add_test(NAME MemoryPoolTests COMMAND test_MemoryPool)

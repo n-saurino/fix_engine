@@ -1,18 +1,16 @@
-refactor(core): Optimize FIX message construction and improve system reliability
+refactor(memory): Simplify FIXBuffer memory model and improve memory pool reliability
 
-Refactored core components of the FIX message construction pipeline to improve efficiency, safety, and maintainability. Introduced a structured approach for CompID and account name lookup to accelerate message building along the hotpath. Enhanced buffer handling to mitigate potential overflow risks. Improved concurrency readiness by making the sequence number generator atomic for future multi-threaded workloads. Also resolved build inconsistencies by aligning GTest and dependency versions between test and application builds.
+Refactored FIXBuffer to clarify ownership of memory by removing the `kCapacity` member variable, preventing confusion regarding memory allocation and deallocation. Fixed an out-of-bounds error in `MemoryPool::UpdateNextFreeIdx()`, improved memory pool initialization efficiency, and enhanced benchmarking reliability by introducing `Serialize` and `benchmark::ClobberMemory()` to prevent compiler optimizations.
 
 Changes:
-- Cleaned up `compile_commands.json` by removing outdated references.
-- Added a `CompID` struct for efficient identifier lookup in FIX message construction.
-- Ensured buffer safety by appending a trailing null character to `Order` buffers.
-- Updated the sequence number generator to use `std::atomic` for thread safety.
-- Fixed version mismatches and GTest conflicts between test and application builds.
+- Removed `kCapacity` member variable from `FIXBuffer` to eliminate ambiguity in memory ownership.
+- Fixed an out-of-bounds error in `MemoryPool::UpdateNextFreeIdx()`.
+- Removed redundant loop from `MemoryPool` initialization, improving efficiency.
+- Added `Serialize` function and `benchmark::ClobberMemory()` to ensure `FIXBuffer` writes are not optimized away by the compiler.
 
 Next steps:
 - Refactor `Append` functions to improve tag handling performance.
 - Optimize `FIXBuffer` by leveraging free functions and direct raw buffer access.
-- Implement a memory pool for `FIXBuffer` to reduce dynamic allocations.
 - Design a lock-free queue for efficient message processing.
 - Build a high-performance FIX message parser to handle inbound server messages.
 

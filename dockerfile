@@ -31,6 +31,7 @@ RUN apt-get update && \
     libxml2-dev \
     libjsoncpp-dev \
     libgtest-dev \
+    libbenchmark-dev \
     clang-tidy \
     clang-format \
     doxygen \
@@ -85,8 +86,8 @@ RUN export CXXFLAGS="-fexceptions" && \
     export CFLAGS="-fexceptions"
 
 # Configure and build the project
-RUN cmake -S . -B build && \
-    cmake --build build
+#RUN cmake -S . -B build && \
+#    cmake --build build
 
 # Default command to keep the container running
 CMD ["/bin/bash"]

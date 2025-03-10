@@ -11,4 +11,5 @@ cmake ..
 cmake --build . --clean-first
 
 # Run the tests
-ctest -V
+ctest -R FIXMessageTests -V  # Runs only FIXMessages tests
+ctest -R MemoryPoolTests -V  # Runs only MemoryPool tests
