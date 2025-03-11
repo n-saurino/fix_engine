@@ -8,3 +8,18 @@ FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00508654,1,1377.75,13
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0275455,0,1423.28,1384.08,67.9416,1359.02,1544.48,10,0
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00455971,1,1331.05,1324.98,22.8196,1310.3,1385.57,10,0
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0124078,0,1351.98,1335.21,47.4151,1305.62,1462.8,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.000535958,1,1362.79,1362.06,31.2112,1314.42,1411.66,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00478561,1,1339.6,1346.04,17.9192,1305.22,1363.85,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00608332,1,1448.49,1457.36,63.6138,1356.82,1523.82,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0120972,0,1373.97,1357.35,43.9307,1333.29,1471.21,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.000940147,1,1494.1,1495.5,91.5326,1350,1685.87,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0151588,0,1367.18,1346.46,50.3549,1322.03,1500.13,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00753688,1,1354.23,1344.02,33.1616,1311.05,1422.74,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10 - 1741733998,0.0154614,0,1372.3,1351.08,74.8294,1311.66,1583.05,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10 - 1741734008,0.0201057,0,1405.09,1376.84,89.1878,1329.98,1605.48,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10 - 1741734023,0.000644291,1,1353.13,1352.26,37.3008,1305.15,1409.1,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10 - 1741734038,0.00597797,1,1342.73,1334.7,34.0939,1307.8,1429.22,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10 - 1741735140,0.00909647,1,1611.58,1596.92,45.2268,1559.37,1720.76,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10 - 1741735152,0.0379517,0,1439.04,1384.43,112.942,1336.49,1700.34,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10 - 1741735911,0.00665448,1,1345.09,1336.14,28.8614,1310.16,1393.2,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10 - 1741735921,0.0306823,0,1417.73,1374.23,119.098,1297.14,1720.05,10,0

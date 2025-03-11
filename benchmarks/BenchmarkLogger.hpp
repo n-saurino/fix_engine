@@ -17,9 +17,11 @@ class BenchmarkLogger : public benchmark::BenchmarkReporter {
   // Constructor opens two files: one for CSV output and one for Prometheus
   // output.
   BenchmarkLogger(const std::string& csv_filename,
-                  const std::string& prom_filename)
+                  const std::string& prom_filename,
+                  const std::string& epoch_tag)
       : log_file(csv_filename, std::ios::app),
-        prom_file(prom_filename, std::ios::app) {
+        prom_file(prom_filename, std::ios::app),
+        epoch_time{epoch_tag} {
     if (!log_file.is_open()) {
       std::cerr << "Error: Could not open CSV log file " << csv_filename
                 << "\n";
@@ -61,8 +63,9 @@ class BenchmarkLogger : public benchmark::BenchmarkReporter {
       times.push_back(run.GetAdjustedRealTime());
     }
     if (times.size() == kTotalRuns) {
-      LogToCSV(report[0].benchmark_name(), times, 0);
-      LogToPrometheus(report[0].benchmark_name(), times);
+      std::string name = report[0].benchmark_name() + " - " + epoch_time;
+      LogToCSV(name, times, 0);
+      LogToPrometheus(name, times);
     }
   }
 
@@ -78,8 +81,9 @@ class BenchmarkLogger : public benchmark::BenchmarkReporter {
     bool is_normal{IsNormal(times)};
 
     if (prom_file.is_open()) {
-      prom_file << "# HELP fix_message_encoding_latency_mean_test result of "
-                   "mean-median test to check normal distribution.\n";
+      prom_file
+          << "# HELP fix_message_encoding_latency_mean_median_test result of "
+          << "mean-median test to check normal distribution.\n";
       prom_file
           << "# TYPE fix_message_encoding_latency_mean_median_test gauge\n";
       prom_file << "fix_message_encoding_latency_mean_median_test{benchmark=\""
@@ -89,50 +93,47 @@ class BenchmarkLogger : public benchmark::BenchmarkReporter {
                    "if normally distributed.\n";
       prom_file
           << "# TYPE fix_message_encoding_latency_normal_distribution gauge\n";
-
       prom_file << "fix_message_encoding_latency_is_normal{benchmark=\"" << name
                 << "\"} " << is_normal << "\n\n";
+
       prom_file
           << "# HELP fix_message_encoding_latency_mean_ns Mean time taken to "
           << "build a FIX message in nanoseconds.\n";
       prom_file << "# TYPE fix_message_encoding_latency_mean_ns gauge\n";
-
       prom_file << "fix_message_encoding_latency_mean_ns{benchmark=\"" << name
                 << "\"} " << mean << "\n\n";
-      prom_file << "# HELP fix_message_encoding_latency_median_test Median "
+
+      prom_file << "# HELP fix_message_encoding_latency_median_ns Median "
                 << "time taken to "
                 << "build a FIX message in nanoseconds.\n";
-      prom_file
-          << "# TYPE fix_message_encoding_latency_mean_median_test gauge\n";
-
+      prom_file << "# TYPE fix_message_encoding_latency_median_ns gauge\n";
       prom_file << "fix_message_encoding_latency_median_ns{benchmark=\"" << name
                 << "\"} " << median << "\n\n";
+
       prom_file << "# HELP fix_message_encoding_latency_std_dev_ns Std. dev of "
                 << "time taken to "
                 << "build a FIX message in nanoseconds.\n";
       prom_file << "# TYPE fix_message_encoding_latency_std_dev_ns gauge\n";
-
       prom_file << "fix_message_encoding_latency_std_dev_ns{benchmark=\""
                 << name << "\"} " << std_dev << "\n\n";
+
       prom_file
           << "# HELP fix_message_encoding_latency_min_ns Min time taken to "
           << "build a FIX message in nanoseconds.\n";
       prom_file << "# TYPE fix_message_encoding_latency_min_ns gauge\n";
-
       prom_file << "fix_message_encoding_latency_min_ns{benchmark=\"" << name
                 << "\"} " << min_agg << "\n\n";
+
       prom_file
           << "# HELP fix_message_encoding_latency_max_ns Max time taken to "
           << "build a FIX message in nanoseconds.\n";
       prom_file << "# TYPE fix_message_encoding_latency_max_ns gauge\n";
-
       prom_file << "fix_message_encoding_latency_max_ns{benchmark=\"" << name
                 << "\"} " << max_agg << "\n\n";
 
       prom_file << "# HELP fix_message_encoding_latency_runs Number of "
                 << "benchmarks runs composing this result.\n";
       prom_file << "# TYPE fix_message_encoding_latency_run gauge\n";
-
       prom_file << "fix_message_encoding_iterations{benchmark=\"" << name
                 << "\"} " << times.size() << "\n\n";
     }
@@ -167,4 +168,5 @@ class BenchmarkLogger : public benchmark::BenchmarkReporter {
  private:
   std::ofstream log_file;
   std::ofstream prom_file;
+  std::string epoch_time;
 };
