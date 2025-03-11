@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: dockerfile
     volumes:
-      - ./logs/benchmarks:/workspace/logs/benchmarks  # Share logs with Prometheus Node Exporter
+      - ./logs/benchmarks/prometheus:/workspace/logs/benchmarks/prometheus  # Share logs with Prometheus Node Exporter
     networks:
       - monitoring
       - FIXNET
@@ -17,7 +17,7 @@ services:
     container_name: prometheus
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./logs/benchmarks:/var/lib/node_exporter/textfile_collector
+      - ./logs/benchmarks/prometheus:/var/lib/node_exporter/textfile_collector
     ports:
       - "9090:9090"
     networks:
@@ -27,7 +27,7 @@ services:
     image: quay.io/prometheus/node-exporter
     container_name: node_exporter
     volumes:
-      - ./logs/benchmarks:/var/lib/node_exporter/textfile_collector  # Read benchmark logs 
+      - ./logs/benchmarks/prometheus:/var/lib/node_exporter/textfile_collector  # Read benchmark logs 
     ports:
       - "9100:9100"
     networks:
