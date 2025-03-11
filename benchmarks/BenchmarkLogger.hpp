@@ -62,32 +62,46 @@ class BenchmarkLogger : public benchmark::BenchmarkReporter {
     }
     if (times.size() == kTotalRuns) {
       LogToCSV(report[0].benchmark_name(), times, 0);
+      LogToPrometheus(report[0].benchmark_name(), times);
     }
   }
 
-  // Log metrics in Prometheus exposition format.
-  //   void LogToPrometheus(const benchmark::BenchmarkReporter::Run& run) {
-  //     if (prom_file.is_open()) {
-  //       prom_file << "# HELP fix_engine_encoding_latency_ns Time taken to
-  //       build "
-  //                    "a FIX message in nanoseconds.\n";
-  //       prom_file << "# TYPE fix_engine_encoding_latency_ns gauge\n";
-  //       prom_file << "fix_engine_encoding_latency_mean_ns " << run.<< "\n";
-  //       prom_file << "fix_engine_encoding_latency_median_ns " << run.median
-  //                 << "\n";
-  //       prom_file << "fix_engine_encoding_latency_stddev_ns " << run.stddev
-  //                 << "\n";
-  //       prom_file << "fix_engine_encoding_latency_min_ns " << run.min_time
-  //                 << "\n";
-  //       prom_file << "fix_engine_encoding_latency_max_ns " << run.max_time
-  //                 << "\n";
-  //       prom_file << "fix_engine_encoding_iterations " << run.iterations <<
-  //       "\n";
-  //     }
-  //   }
+  // Log metrics in Prometheus exposition format
+  void LogToPrometheus(const std::string& name,
+                       const std::vector<double>& times) {
+    double mean_median{CalcMeanMedian(times)};
+    double mean{CalcMean(times)};
+    double median{CalcMedian(times)};
+    double std_dev{CalcStdDev(times, mean)};
+    double max_agg{CalcMax(times)};
+    double min_agg{CalcMin(times)};
+    bool is_normal{IsNormal(times)};
+
+    if (prom_file.is_open()) {
+      // prom_file << "# HELP fix_message_encoding_latency_ns Time taken to "
+      // << "build a FIX message in nanoseconds.\n";
+      // prom_file << "# TYPE fix_message_encoding_latency_ns gauge\n";
+      prom_file << "fix_message_encoding_latency_mean_median_test{benchmark=\""
+                << name << "\"} " << mean_median << "\n";
+      prom_file << "fix_message_encoding_latency_is_normal{benchmark=\"" << name
+                << "\"} " << is_normal << "\n";
+      prom_file << "fix_message_encoding_latency_mean_ns{benchmark=\"" << name
+                << "\"} " << mean << "\n";
+      prom_file << "fix_message_encoding_latency_median_ns{benchmark=\"" << name
+                << "\"} " << median << "\n";
+      prom_file << "fix_message_encoding_latency_stddev_ns{benchmark=\"" << name
+                << "\"} " << std_dev << "\n";
+      prom_file << "fix_message_encoding_latency_min_ns{benchmark=\"" << name
+                << "\"} " << min_agg << "\n";
+      prom_file << "fix_message_encoding_latency_max_ns{benchmark=\"" << name
+                << "\"} " << max_agg << "\n";
+      prom_file << "fix_message_encoding_iterations{benchmark=\"" << name
+                << "\"} " << times.size() << "\n";
+    }
+  }
 
   // Log metrics in CSV format.
-  void LogToCSV(const std::string& name, const std::vector<double> times,
+  void LogToCSV(const std::string& name, const std::vector<double>& times,
                 uint64_t cpu_cycles = 0) {
     double mean_median{CalcMeanMedian(times)};
     double mean{CalcMean(times)};
@@ -99,8 +113,7 @@ class BenchmarkLogger : public benchmark::BenchmarkReporter {
     if (log_file.is_open()) {
       log_file << name << "," << mean_median << "," << is_normal << "," << mean
                << "," << median << "," << std_dev << "," << min_agg << ","
-               << max_agg << ","
-               << "," << times.size() << "," << cpu_cycles << "\n";
+               << max_agg << "," << times.size() << "," << cpu_cycles << "\n";
     }
   }
 

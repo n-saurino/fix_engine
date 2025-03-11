@@ -1,2 +1,9 @@
 Test Name,Mean-Median Ratio,Normal Distribution,Mean (ns),Median (ns),Std Dev (ns),Min (ns),Max (ns),Iterations,CPU Cycles
-FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00315041,1,1361.29,1357,38.1058,1309.13,1422.06,,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.000628616,1,1324.28,1323.45,8.14197,1314,1342.49,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00762512,1,1326.91,1316.79,25.3706,1304.15,1376.65,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00202142,1,1324.92,1322.24,20.2487,1298.57,1368.8,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0159391,0,1429.67,1452.83,86.0429,1312.65,1576.3,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00675732,1,1318,1309.09,21.2613,1295.88,1364.99,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00508654,1,1377.75,1370.74,30.6732,1338.84,1445.04,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0275455,0,1423.28,1384.08,67.9416,1359.02,1544.48,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00455971,1,1331.05,1324.98,22.8196,1310.3,1385.57,10,0

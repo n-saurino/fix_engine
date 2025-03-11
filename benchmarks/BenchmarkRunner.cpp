@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
   // FIXMessage Builder Benchmark
   BenchmarkLogger fix_message_builder_reporter(
       "logs/benchmarks/fix_benchmark_results.csv",
-      "logs/benchmarks/prometheus.txt");
+      "logs/benchmarks/prometheus.prom");
   benchmark::RunSpecifiedBenchmarks(&fix_message_builder_reporter);
 
   return 0;
