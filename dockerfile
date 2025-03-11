@@ -90,4 +90,5 @@ RUN export CXXFLAGS="-fexceptions" && \
 #    cmake --build build
 
 # Default command to keep the container running
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]
+CMD ["tail", "-f", "/dev/null"]
