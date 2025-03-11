@@ -8,8 +8,8 @@ int main(int argc, char** argv) {
 
   // FIXMessage Builder Benchmark
   BenchmarkLogger fix_message_builder_reporter(
-      "logs/benchmarks/fix_benchmark_results.csv",
-      "logs/benchmarks/prometheus.prom");
+      "logs/benchmarks/csv/fix_benchmark_results.csv",
+      "logs/benchmarks/prometheus/prometheus.prom");
   benchmark::RunSpecifiedBenchmarks(&fix_message_builder_reporter);
 
   return 0;
