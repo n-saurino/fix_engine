@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: dockerfile
     volumes:
-      - ./logs/benchmarks/prometheus:/workspace/logs/benchmarks/prometheus  # Share logs with node_exporter
+      - ./logs/benchmarks/prometheus/active:/workspace/logs/benchmarks/prometheus/active  # Share logs with node_exporter
     networks:
       - monitoring
       - FIXNET
@@ -16,7 +16,13 @@ services:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus:/etc/prometheus
+      - /Users/nigelsaurino/docker-volumes/prometheus:/prometheus
+#      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"  # <-- Explicitly set storage path
+      - "--storage.tsdb.retention.time=365d"  # <-- Keep data for 1 year
     ports:
       - "9090:9090"
     networks:
@@ -28,22 +34,25 @@ services:
     command:
       - '--collector.textfile.directory=/var/lib/node_exporter/textfile_collector'
     volumes:
-      - ./logs/benchmarks/prometheus:/var/lib/node_exporter/textfile_collector  # Read benchmark logs
+      - ./logs/benchmarks/prometheus/active:/var/lib/node_exporter/textfile_collector  # Read benchmark logs
     ports:
       - "9100:9100"
     networks:
       - monitoring
 
-  grafana:
-    image: grafana/grafana
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    networks:
-      - monitoring
+  #grafana:
+  #  image: grafana/grafana
+  #  container_name: grafana
+  #  ports:
+  #    - "3000:3000"
+  #  networks:
+  #    - monitoring
 
 networks:
   monitoring:
     driver: bridge
   FIXNET:
     driver: bridge
+
+# volumes:
+#  prometheus_data:

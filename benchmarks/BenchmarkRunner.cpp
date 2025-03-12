@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
                            .count();
 
   std::stringstream promFileName;
-  promFileName << "logs/benchmarks/prometheus/prometheus_" << epoch_seconds
+  promFileName << "logs/benchmarks/prometheus/active/prometheus_" << epoch_seconds
                << ".prom";
 
   // FIXMessage Builder Benchmark

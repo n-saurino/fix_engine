@@ -3,11 +3,13 @@ set -e  # Exit immediately if any command fails
 set -o pipefail  # Capture errors in pipelines
 
 # Define the build directory and benchmark executable path.
-BUILD_DIR="build"
+BUILD_DIR="/workspace/build"
 BENCHMARK_EXEC="${BUILD_DIR}/benchmarks/FIXMessageBenchmark"
 
 # Create the build directory if it doesn't exist.
 mkdir -p "${BUILD_DIR}"
+
+cd /workspace
 
 # Run CMake to configure the project.
 echo "Configuring project..."

@@ -1,14 +1,20 @@
-chore(work-in-progress): End of day push for continuation from another setup
+feat(benchmarking): Set up Prometheus pipeline and Grafana visualization
 
-Pushing the latest changes to ensure work can continue from another machine if needed. This is not a finalized checkpoint, but a work-in-progress commit to preserve current progress.
+Established a benchmarking pipeline by running Prometheus and its Node Exporter as microservices, exposing performance data to Grafana Cloud for visualization. Created a basic dashboard displaying FIX message encoder latency metrics. Decided to run benchmark scripts locally on commits to ensure consistency, avoiding potential variability introduced by GitHub Actions server load. Additionally, improved logging structure by separating CSV files for internal analysis and Prometheus logs for external visualization. Organized project scripts into a dedicated `scripts` folder. Implemented a cron job to rotate benchmark logs every minute for efficient log management.
 
 Changes:
-- Latest in-progress modifications and ongoing development work.
+- Deployed Prometheus and Node Exporter as microservices for performance monitoring.
+- Integrated Prometheus with Grafana Cloud to visualize FIX message encoder latency metrics.
+- Created an initial Grafana dashboard for real-time performance tracking.
+- Chose to run benchmark scripts locally on commits to maintain consistency.
+- Added separate logs for CSV (internal analysis) and Prometheus (external visualization).
+- Organized project-related scripts into a dedicated `scripts/` directory.
+- Implemented a cron job to rotate benchmark logs every minute.
+- Exposed Grafana dashboard publicly and updated readme to include the link
 
 Next steps:
-- Refactor `Append` functions to improve tag handling performance.
-- Optimize `FIXBuffer` by leveraging free functions and direct raw buffer access.
-- Design a lock-free queue for efficient message processing.
-- Build a high-performance FIX message parser to handle inbound server messages.
+- Expand Grafana dashboard with additional performance metrics and visualizations.
+- Optimize Prometheus data collection for lower-latency reporting.
+- Investigate additional benchmark optimizations for FIX message encoding.
 
 Authored and reviewed by: Nigel Saurino

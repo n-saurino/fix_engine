@@ -1,4 +1,0 @@
-# HELP fix_message_encoding_latency_mean_ns Time taken to build a FIX message in nanoseconds.
-# TYPE fix_message_encoding_latency_mean_ns gauge
-fix_message_encoding_latency_mean_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1444.88
-

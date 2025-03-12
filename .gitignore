@@ -1,3 +1,6 @@
+#Ignore environment file
+.env
+
 # Ignore build directories
 /build/
 /build-*/
@@ -72,5 +75,8 @@ Thumbs.db
 # Ignore debugging symbols
 *.dSYM
 
-#Ignore notes folder
+# Ignore notes folder
 # /notes/
+
+# Ignore prometheus password
+/monitoring/prometheus/password.txt

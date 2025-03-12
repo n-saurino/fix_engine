@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 10s  # Scrape benchmark results every 10 seconds
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["prometheus:9090"]
+
+  - job_name: "fix_engine_benchmarks"
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["node_exporter:9100"]
+
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: "fix_.*"
+        action: keep
+
+#  - job_name: "textfile_collector"
+#    metrics_path: /metrics
+#    static_configs:
+#      - targets: ["node_exporter:9100"]
+
+remote_write:
+- url: https://prometheus-prod-56-prod-us-east-2.grafana.net/api/prom/push
+  basic_auth:
+    username: 2313173 
+    password_file: /etc/prometheus/password.txt

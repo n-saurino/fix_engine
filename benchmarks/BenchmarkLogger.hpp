@@ -63,7 +63,8 @@ class BenchmarkLogger : public benchmark::BenchmarkReporter {
       times.push_back(run.GetAdjustedRealTime());
     }
     if (times.size() == kTotalRuns) {
-      std::string name = report[0].benchmark_name() + " - " + epoch_time;
+      // std::string name = report[0].benchmark_name() + " - " + epoch_time;
+      std::string name = report[0].benchmark_name();
       LogToCSV(name, times, 0);
       LogToPrometheus(name, times);
     }
