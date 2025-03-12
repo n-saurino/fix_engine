@@ -1,24 +1,25 @@
-# Concurrent Server in C++ 
+# Low-latency FIX client engine in C++ 
+## Summary
+- View basic latency dashboard here (using Prometheus and Grafana): https://fixengine.grafana.net/public-dashboards/f331d66f32ae40a1b7819796679c8bd0
+- Articles (Coming soon...)
+
 ## Components
 - Custom FIX Engine (in progress)
+- Benchmarking Pipeline: Google benchmark, Prometheus for capture and serving, Grafana for visualization
+- Testing Framework: Google test and ctest
 
 ## Features
-- Protocol: Must be binary protocol. Considering FIX/SBE, Custom SBE, ITCH or OUCH
+- Protocol: FIX protocol due to popularity, will move to FIX SBE or similar binary protocols in future enhancements 
 - Combo of C++ and C
 - Using POSIX raw sockets
 
-## FIX Engine Architecture
+## FIX Engine Architecture (IN PROGRESS...)
 ### Classes
-- FIXClient: High-level interface for the FIX engine
 - FIXNetworkHandler: Handles non-blocking TCP sockets (epoll/io_uring)
-    - Needs to define logic for Client (Initiator) and for Server (Acceptor)
 - FIXSessionManager: Manages session state (logon, heartbeats, reconnections)
 - FIXMessageParser: Decodes incoming FIX messages
-    - FIX SBE (Simple Binary Encoding) message schema
-    - Metadata is normally not sent on the wire with Simple Binary Encoding messages. It is necessary to possess the message schema that was used to encode a message in order to decode it. In other words, Simple Binary Encoding messages are not self-describing. Rather, message schemas are typically exchanged out-of-band between counterparties.
-    - Documentation: https://github.com/FIXTradingCommunity/fix-simple-binary-encoding/tree/master/v2-0-RC3/doc
-- FIXMessageBuilder: Encodes outgoing FIX messages
+    - SBE Documentation (for future enhancements): https://github.com/FIXTradingCommunity/fix-simple-binary-encoding/tree/master/v2-0-RC3/doc
+- FIXMessage and CRTP Derived FIXMessages: Encodes outgoing FIX messages
 - FIXMessageQueue: Lock-free queue for inter-thread communication
-- FIXLogger: Optimized logging for compliance & debugging
+- BenchmarkLogger: Google Benchmark custom logger to handle latency benchmarking
 - FIXDispatcher: Dispatches FIX messages to application handlers
-- OrderManager: Handles order lifecycle (New, Modify, Cancel, Execution Reports)

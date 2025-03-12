@@ -42,6 +42,8 @@ RUN apt-get update && \
     libbz2-dev \
     liblzma-dev \
     neovim \
+    cron \
+    findutils \
     && rm -rf /var/lib/apt/lists/*
 
 # Set GCC and G++ alternatives to ensure consistent usage of GCC 9
@@ -79,7 +81,11 @@ RUN wget https://archives.boost.io/release/1.85.0/source/boost_1_85_0.tar.gz && 
 COPY . /workspace
 
 # Give tests script execute permissions
-RUN chmod +x /workspace/run_tests.sh
+RUN chmod +x /workspace/scripts/git-commit-file.sh
+RUN chmod +x /workspace/scripts/run_tests.sh
+RUN chmod +x /workspace/scripts/run_benchmarks.sh
+RUN chmod +x /workspace/scripts/cleanup_prometheus_files.sh
+RUN chmod +x /workspace/scripts/commit_suite.sh
 
 # Add explicit compiler flags to enable exceptions
 RUN export CXXFLAGS="-fexceptions" && \
@@ -90,4 +96,14 @@ RUN export CXXFLAGS="-fexceptions" && \
 #    cmake --build build
 
 # Default command to keep the container running
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]
+
+# Add cron job to run the cleanup script every minute
+# Create the cron job file in /etc/cron.d/ and set correct permissions.
+RUN echo "* * * * * root /workspace/scripts/cleanup_prometheus_files.sh >> /var/log/cleanup.log 2>&1" > /etc/cron.d/cleanup_prometheus && \
+    chmod 0644 /etc/cron.d/cleanup_prometheus && \
+    touch /var/log/cleanup.log
+
+# Run cron in the foreground
+CMD ["cron", "-f"]
+#CMD ["tail", "-f", "/dev/null"]

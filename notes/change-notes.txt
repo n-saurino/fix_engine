@@ -1,0 +1,7 @@
+Changes:
+* Set up benchmarking pipeline by running Prometheus and its node_exporter as microservices.
+* Exposing the data from Prometheus to Grafana cloud for visualization
+* Created a basic dashboard in Grafana displaying the FIX message encoder latency metrics
+* Choosing to run benchmark scripts on commits using locally to avoid inconsistencies from running benchmarks through Github Actions based on their server load
+* Added separate logs for csv files (internal use) and for prometheus files (external visualization)
+* Created a script folder to organize the scripts related to the project
