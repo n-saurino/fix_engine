@@ -1,17 +1,15 @@
-feat(concurrency): Begin lock-free queue implementation for message passing
+feat(concurrency): Implement basic framework for SPSC lock-free queue
 
-Started implementing a lock-free queue to facilitate efficient message passing between the application and networking threads. The design is based on Charles Frasch's CppCon talk and example implementation. Created the `feat/lf-queue` branch to develop this feature in isolation. Currently defining the foundational structure in a header file, including key member variables and type declarations.
+Completed an initial pass through Charles Frasch's implementation of a single-producer, single-consumer (SPSC) lock-free queue. Established the foundational class framework for `LFQueue`, outlining its core structure in preparation for implementing enqueue and dequeue operations.
 
 Changes:
-- Began implementing a lock-free queue for inter-thread message passing.
-- Based the design on Charles Frasch's CppCon talk and example.
-- Created a new feature branch: `feat/lf-queue`.
-- Defined the initial queue structure in a header file, outlining key member variables and types.
+- Finished reviewing Charles Frasch's SPSC lock-free queue implementation.
+- Created the initial `LFQueue` class structure with key member variables and type definitions.
+- Established a foundation for efficient inter-thread message passing.
 
 Next steps:
-- Implement enqueue and dequeue operations with memory order guarantees.
-- Integrate the queue into the application’s messaging pipeline.
-- Optimize for low-latency performance in a multi-threaded environment.
+- Integrate `LFQueue` into the messaging pipeline for application-to-networking communication.
 - Add unit tests to validate correctness and concurrency behavior.
+- Benchmark performance to identify potential optimizations.
 
 Authored and reviewed by: Nigel Saurino
