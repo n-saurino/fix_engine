@@ -1,20 +1,17 @@
-feat(benchmarking): Set up Prometheus pipeline and Grafana visualization
+feat(concurrency): Begin lock-free queue implementation for message passing
 
-Established a benchmarking pipeline by running Prometheus and its Node Exporter as microservices, exposing performance data to Grafana Cloud for visualization. Created a basic dashboard displaying FIX message encoder latency metrics. Decided to run benchmark scripts locally on commits to ensure consistency, avoiding potential variability introduced by GitHub Actions server load. Additionally, improved logging structure by separating CSV files for internal analysis and Prometheus logs for external visualization. Organized project scripts into a dedicated `scripts` folder. Implemented a cron job to rotate benchmark logs every minute for efficient log management.
+Started implementing a lock-free queue to facilitate efficient message passing between the application and networking threads. The design is based on Charles Frasch's CppCon talk and example implementation. Created the `feat/lf-queue` branch to develop this feature in isolation. Currently defining the foundational structure in a header file, including key member variables and type declarations.
 
 Changes:
-- Deployed Prometheus and Node Exporter as microservices for performance monitoring.
-- Integrated Prometheus with Grafana Cloud to visualize FIX message encoder latency metrics.
-- Created an initial Grafana dashboard for real-time performance tracking.
-- Chose to run benchmark scripts locally on commits to maintain consistency.
-- Added separate logs for CSV (internal analysis) and Prometheus (external visualization).
-- Organized project-related scripts into a dedicated `scripts/` directory.
-- Implemented a cron job to rotate benchmark logs every minute.
-- Exposed Grafana dashboard publicly and updated readme to include the link
+- Began implementing a lock-free queue for inter-thread message passing.
+- Based the design on Charles Frasch's CppCon talk and example.
+- Created a new feature branch: `feat/lf-queue`.
+- Defined the initial queue structure in a header file, outlining key member variables and types.
 
 Next steps:
-- Expand Grafana dashboard with additional performance metrics and visualizations.
-- Optimize Prometheus data collection for lower-latency reporting.
-- Investigate additional benchmark optimizations for FIX message encoding.
+- Implement enqueue and dequeue operations with memory order guarantees.
+- Integrate the queue into the application’s messaging pipeline.
+- Optimize for low-latency performance in a multi-threaded environment.
+- Add unit tests to validate correctness and concurrency behavior.
 
 Authored and reviewed by: Nigel Saurino
