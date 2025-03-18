@@ -15,14 +15,26 @@ int main(int argc, char** argv) {
                            .count();
 
   std::stringstream promFileName;
-  promFileName << "logs/benchmarks/prometheus/active/prometheus_" << epoch_seconds
-               << ".prom";
+  promFileName << "logs/benchmarks/prometheus/active/prometheus_"
+               << epoch_seconds << ".prom";
 
   // FIXMessage Builder Benchmark
   BenchmarkLogger fix_message_builder_reporter(
       "logs/benchmarks/csv/fix_benchmark_results.csv", promFileName.str(),
       std::to_string(epoch_seconds));
   benchmark::RunSpecifiedBenchmarks(&fix_message_builder_reporter);
+
+  promFileName.clear();
+  epoch_seconds = std::chrono::duration_cast<std::chrono::seconds>(
+                      std::chrono::system_clock::now().time_since_epoch())
+                      .count();
+
+  promFileName << "logs/benchmarks/prometheus/active/prometheus_"
+               << epoch_seconds << ".prom";
+
+  BenchmarkLogger memory_pool_reporter(
+      "logs/benchmarks/csv/memory_pool_results.csv", promFileName.str(),
+      std::to_string(epoch_seconds));
 
   return 0;
 }

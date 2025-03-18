@@ -25,7 +25,14 @@ class LFQueue : private Alloc {
   explicit LFQueue(SizeType capacity, Alloc const& alloc = Alloc{})
       : Alloc{alloc},
         bit_mask_{capacity - 1},
-        ring_buffer_{allocator_traits::allocate(*this, capacity)} {}
+        ring_buffer_{allocator_traits::allocate(*this, capacity)},
+        push_cursor_{},
+        pop_cursor_{},
+        cached_push_cursor_{},
+        cached_pop_cursor_{} {
+    ASSERT((capacity & (capacity - 1)) == 0,
+           "Capacity must be a power of 2...");
+  }
 
   ~LFQueue() {
     while (!Empty()) {
@@ -57,7 +64,7 @@ class LFQueue : private Alloc {
 
     // could potentially be a std::move instead of a copy?
     new (Element(push_cursor)) T(val);
-    push_cursor_.store(push_cursor + 1, std::memory_order_relaxed);
+    push_cursor_.store(push_cursor + 1, std::memory_order_release);
     return true;
   }
 

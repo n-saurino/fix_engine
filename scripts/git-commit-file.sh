@@ -1,2 +1,2 @@
 #!/bin/bash
-git commit -F ../commit-message.txt
+git commit -F /workspace/commit-message.txt

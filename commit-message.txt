@@ -1,15 +1,15 @@
-feat(concurrency): Implement basic framework for SPSC lock-free queue
+refactor(logging): Introduce Formatter class for flexible benchmark logging
 
-Completed an initial pass through Charles Frasch's implementation of a single-producer, single-consumer (SPSC) lock-free queue. Established the foundational class framework for `LFQueue`, outlining its core structure in preparation for implementing enqueue and dequeue operations.
+Refactored the `BenchmarkLogger` by introducing a `Formatter` class inheritance structure, enabling custom formatting for different benchmarks as needed. The logger now accepts a formatter that delegates logging logic to derived class implementations, simplifying the `BenchmarkLogger` and improving modularity.
 
 Changes:
-- Finished reviewing Charles Frasch's SPSC lock-free queue implementation.
-- Created the initial `LFQueue` class structure with key member variables and type definitions.
-- Established a foundation for efficient inter-thread message passing.
+- Introduced a `Formatter` class hierarchy to allow custom benchmark log formatting.
+- Updated `BenchmarkLogger` to accept a formatter that calls derived class `Log` functions.
+- Simplified `BenchmarkLogger` by moving formatting logic into dedicated formatter classes.
 
 Next steps:
-- Integrate `LFQueue` into the messaging pipeline for application-to-networking communication.
-- Add unit tests to validate correctness and concurrency behavior.
-- Benchmark performance to identify potential optimizations.
+- Validate the refactor by running FIXMessageBuilder benchmarks.
+- Implement benchmarking for `LFQueue` performance.
+- Develop unit tests to validate `LFQueue` functionality.
 
 Authored and reviewed by: Nigel Saurino
