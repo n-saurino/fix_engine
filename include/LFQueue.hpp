@@ -12,6 +12,7 @@
 implementation.
 */
 
+// Planning to pass next iteration of FIXMessage struct
 template <typename T, typename Alloc = std::allocator<T>>
 class LFQueue : private Alloc {
  public:
