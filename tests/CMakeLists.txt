@@ -18,9 +18,9 @@ add_executable(test_MemoryPool test_MemoryPool.cpp ${SOURCE_FILES})
 add_executable(test_LFQueue test_LFQueue.cpp ${SOURCE_FILES})
 
 # Include directories for both test executables
-target_include_directories(test_FIXMessages PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/generated/sbe")
-target_include_directories(test_MemoryPool PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/generated/sbe")
-target_include_directories(test_LFQueue PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/generated/sbe")
+target_include_directories(test_FIXMessages PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include")
+target_include_directories(test_MemoryPool PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include")
+target_include_directories(test_LFQueue PRIVATE ${Boost_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include")
 
 # Link test executables with Google Test and pthread
 target_link_libraries(test_FIXMessages PRIVATE GTest::gtest GTest::gtest_main pthread)

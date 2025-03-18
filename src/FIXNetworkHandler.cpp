@@ -43,7 +43,7 @@ void FIXNetworkHandler::Start() {
   client_socket_address.sin_family = AF_INET;
   client_socket_address.sin_port = htons(PORT_NUM);
 
-  inet_pton(AF_INET, "172.18.0.3", &client_socket_address.sin_addr);
+  inet_pton(AF_INET, "172.18.0.2", &client_socket_address.sin_addr);
 
   int connect_result{};
 
@@ -59,14 +59,6 @@ void FIXNetworkHandler::Start() {
     close(client_socket_fd);
     return;
   }
-  sockets_[socket_idx_++] = client_socket_fd;
-  MemoryPool pool;
-  FIXMessageBase::seq_num_generator_ = 1;
-  FIXBuffer logon_buffer(pool.Allocate());
-  FIXLogon logon(logon_buffer);
-  logon.Serialize();
-  Send(logon_buffer, client_socket_fd);
-  pool.Free(logon_buffer.Data());
 
   // test protocol
   // Test(latency_test, client_socket_fd);

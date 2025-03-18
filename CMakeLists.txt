@@ -27,6 +27,7 @@ else()
 endif()
 
 find_package(GTest REQUIRED)
+find_package(benchmark REQUIRED)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 

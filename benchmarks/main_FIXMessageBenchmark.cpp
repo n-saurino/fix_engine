@@ -6,7 +6,6 @@
 
 #include "BenchmarkLogger.hpp"
 #include "FIXMessageBuilderBenchmarkFormatter.hpp"
-#include "LFQueueBenchmarkFormatter.hpp"
 
 int main(int argc, char** argv) {
   benchmark::Initialize(&argc, argv);
@@ -27,11 +26,5 @@ int main(int argc, char** argv) {
       "logs/benchmarks/csv/fix_benchmark_results.csv", promFileName.str(),
       std::to_string(epoch_seconds), fix_message_builder_formatter);
   benchmark::RunSpecifiedBenchmarks(&fix_message_builder_reporter);
-
-  LFQueueBenchmarkFormatter lf_queue_formatter;
-  BenchmarkLogger lf_queue_reporter(
-      "logs/benchmarks/csv/lf_queue_results.csv", promFileName.str(),
-      std::to_string(epoch_seconds), lf_queue_formatter);
-  benchmark::RunSpecifiedBenchmarks(&lf_queue_reporter);
   return 0;
 }

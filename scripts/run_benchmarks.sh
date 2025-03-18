@@ -4,7 +4,7 @@ set -o pipefail  # Capture errors in pipelines
 
 # Define the build directory and benchmark executable path.
 BUILD_DIR="/workspace/build"
-BENCHMARK_EXEC="${BUILD_DIR}/benchmarks/FIXMessageBenchmark"
+BENCHMARK_EXEC="${BUILD_DIR}/benchmarks/FIXEncoderBenchmark"
 
 # Create the build directory if it doesn't exist.
 mkdir -p "${BUILD_DIR}"
@@ -21,4 +21,6 @@ cmake --build "${BUILD_DIR}" -- -j$(nproc)
 
 # Run the benchmark executable.
 echo "Running benchmarks..."
-"${BENCHMARK_EXEC}"
+# "${BENCHMARK_EXEC}"
+# "${BUILD_DIR}/benchmarks/FIXEncoderBenchmark"
+"${BUILD_DIR}/benchmarks/LFQueueBenchmark"

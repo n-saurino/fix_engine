@@ -1,0 +1,4 @@
+# HELP fix_message_encoding_latency_mean_median_test result of mean-median test to check normal distribution.
+# TYPE fix_message_encoding_latency_mean_median_test gauge
+fix_message_encoding_latency_mean_median_test{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 0.00628473
+

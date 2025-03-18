@@ -11,10 +11,10 @@ scrape_configs:
     static_configs:
       - targets: ["node_exporter:9100"]
 
-    metric_relabel_configs:
-      - source_labels: [__name__]
-        regex: "fix_.*"
-        action: keep
+#    metric_relabel_configs:
+#      - source_labels: [__name__]
+#        regex: "fix_.*"
+#        action: keep
 
 #  - job_name: "textfile_collector"
 #    metrics_path: /metrics

@@ -24,38 +24,38 @@ class LFQueueTest : public ::testing::Test {
 // Test that a push followed by a pop yields the pushed value.
 TEST_F(LFQueueTest, BasicPushPop) {
   int value = 42;
-  EXPECT_TRUE(queue.Empty());
-  EXPECT_FALSE(queue.Full());
+  EXPECT_EQ(queue.Empty(), true);
+  EXPECT_EQ(queue.Full(), false);
 
-  EXPECT_TRUE(queue.Push(value));
+  EXPECT_EQ(queue.Push(value), true);
   EXPECT_EQ(queue.Size(), 1);
-  EXPECT_FALSE(queue.Empty());
+  EXPECT_EQ(queue.Empty(), false);
 
   int popped = 0;
-  EXPECT_TRUE(queue.Pop(popped));
+  EXPECT_EQ(queue.Pop(popped), true);
   EXPECT_EQ(popped, value);
   EXPECT_EQ(queue.Size(), 0);
-  EXPECT_TRUE(queue.Empty());
+  EXPECT_EQ(queue.Empty(), true);
 }
 
 // Test that the queue reports being full when capacity is reached.
 TEST_F(LFQueueTest, QueueFullTest) {
   // Fill the queue to capacity.
   for (int i = 0; i < kCapacity; ++i) {
-    EXPECT_TRUE(queue.Push(i));
+    EXPECT_EQ(queue.Push(i), true);
   }
   EXPECT_EQ(queue.Size(), kCapacity);
-  EXPECT_TRUE(queue.Full());
+  EXPECT_EQ(queue.Full(), true);
 
   // Attempting one more push should return false.
-  EXPECT_FALSE(queue.Push(999));
+  EXPECT_EQ(queue.Push(999), false);
 }
 
 // Test that popping from an empty queue fails.
 TEST_F(LFQueueTest, QueueEmptyTest) {
   int value = 0;
-  EXPECT_TRUE(queue.Empty());
-  EXPECT_FALSE(queue.Pop(value));
+  EXPECT_EQ(queue.Empty(), true);
+  EXPECT_EQ(queue.Pop(value), false);
 }
 
 // Test that the queue maintains FIFO (first-in, first-out) order.
@@ -63,15 +63,15 @@ TEST_F(LFQueueTest, FIFOOrder) {
   std::vector<int> inputs = {1, 2, 3, 4, 5};
   // Enqueue elements.
   for (int x : inputs) {
-    EXPECT_TRUE(queue.Push(x));
+    EXPECT_EQ(queue.Push(x), true);
   }
   // Dequeue elements and check order.
   for (int expected : inputs) {
     int output = 0;
-    EXPECT_TRUE(queue.Pop(output));
+    EXPECT_EQ(queue.Pop(output), true);
     EXPECT_EQ(output, expected);
   }
-  EXPECT_TRUE(queue.Empty());
+  EXPECT_EQ(queue.Empty(), true);
 }
 
 // Test that the Size() function reflects the correct number of elements.
@@ -79,11 +79,11 @@ TEST_F(LFQueueTest, SizeTest) {
   EXPECT_EQ(queue.Size(), 0);
   // Push a few items.
   for (int i = 0; i < 3; ++i) {
-    EXPECT_TRUE(queue.Push(i));
+    EXPECT_EQ(queue.Push(i), true);
   }
   EXPECT_EQ(queue.Size(), 3);
 
   int value = 0;
-  EXPECT_TRUE(queue.Pop(value));
+  EXPECT_EQ(queue.Pop(value), true);
   EXPECT_EQ(queue.Size(), 2);
 }
