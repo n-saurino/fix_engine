@@ -30,3 +30,6 @@ FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00891041,1,1329.1,131
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0380086,0,1519.51,1461.75,136.344,1380.15,1788.32,10,0
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00892697,1,1452.67,1439.71,62.5647,1362.42,1548.35,10,0
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00683151,1,1385.04,1375.58,36.8824,1348.45,1460.11,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0201215,0,1543.23,1512.17,138.337,1405.6,1878.33,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00418521,1,1402.58,1396.71,17.7876,1384.33,1435.79,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0188775,0,1454.96,1427.5,60.035,1406.38,1577.2,10,0

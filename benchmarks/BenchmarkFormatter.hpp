@@ -7,7 +7,7 @@
 
 class BenchmarkFormatter {
  public:
-  virtual ~BenchmarkFormatter() = 0;
+  virtual ~BenchmarkFormatter() = default;
 
   virtual std::string GetCSVHeader() const = 0;
 

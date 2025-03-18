@@ -7,6 +7,8 @@
 #include <memory>
 #include <new>
 
+#include "Macros.hpp"
+
 /* Thread-safe, efficient LF Queue based on talk and example from Charles Frasch
 (IEX Senior Dev). Followed along and built the queue from scratch based on his
 implementation.
@@ -90,7 +92,7 @@ class LFQueue : private Alloc {
 
   auto Empty() const noexcept { return Size() == 0; }
 
-  auto Capacity() { return bit_mask_ + 1; }
+  auto Capacity() const noexcept { return bit_mask_ + 1; }
 
  private:
   // bit mask to make indexing ring buffer fast ~ 1 cycle by using bitwise &

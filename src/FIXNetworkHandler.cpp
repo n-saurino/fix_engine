@@ -60,6 +60,14 @@ void FIXNetworkHandler::Start() {
     return;
   }
   sockets_[socket_idx_++] = client_socket_fd;
+  MemoryPool pool;
+  FIXMessageBase::seq_num_generator_ = 1;
+  FIXBuffer logon_buffer(pool.Allocate());
+  FIXLogon logon(logon_buffer);
+  logon.Serialize();
+  Send(logon_buffer, client_socket_fd);
+  pool.Free(logon_buffer.Data());
+
   // test protocol
   // Test(latency_test, client_socket_fd);
   // Test(throughput_test, client_socket_fd);

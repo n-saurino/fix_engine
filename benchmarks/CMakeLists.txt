@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(benchmark REQUIRED)
 
-add_executable(FIXMessageBenchmark FIXMessageBenchmark.cpp BenchmarkRunner.cpp)
-target_include_directories(FIXMessageBenchmark PRIVATE ../include)
-target_link_libraries(FIXMessageBenchmark PRIVATE benchmark::benchmark)
+add_executable(Benchmarks FIXMessageBenchmark.cpp BenchmarkRunner.cpp LFQueueBenchmark.cpp)
+target_include_directories(Benchmarks PRIVATE ../include)
+target_link_libraries(Benchmarks PRIVATE benchmark::benchmark)
