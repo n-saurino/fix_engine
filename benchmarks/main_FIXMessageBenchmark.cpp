@@ -5,6 +5,7 @@
 #include <string>
 
 #include "BenchmarkLogger.hpp"
+#include "FIXMessageBuilderBenchmarkFormatter.hpp"
 
 int main(int argc, char** argv) {
   benchmark::Initialize(&argc, argv);
@@ -15,14 +16,15 @@ int main(int argc, char** argv) {
                            .count();
 
   std::stringstream promFileName;
-  promFileName << "logs/benchmarks/prometheus/active/prometheus_" << epoch_seconds
-               << ".prom";
+  promFileName << "logs/benchmarks/prometheus/active/prometheus_"
+               << epoch_seconds << ".prom";
+
+  FIXMessageBuilderBenchmarkFormatter fix_message_builder_formatter;
 
   // FIXMessage Builder Benchmark
   BenchmarkLogger fix_message_builder_reporter(
       "logs/benchmarks/csv/fix_benchmark_results.csv", promFileName.str(),
-      std::to_string(epoch_seconds));
+      std::to_string(epoch_seconds), fix_message_builder_formatter);
   benchmark::RunSpecifiedBenchmarks(&fix_message_builder_reporter);
-
   return 0;
 }

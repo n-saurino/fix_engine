@@ -13,3 +13,4 @@ cmake --build . --clean-first
 # Run the tests
 ctest -R FIXMessageTests -V  # Runs only FIXMessages tests
 ctest -R MemoryPoolTests -V  # Runs only MemoryPool tests
+ctest -R LFQueueTests -V # Runs only LFQueue tests

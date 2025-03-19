@@ -1,20 +1,20 @@
-feat(benchmarking): Set up Prometheus pipeline and Grafana visualization
+refactor(benchmarking): Extend framework for new benchmarks and LFQueue testing
 
-Established a benchmarking pipeline by running Prometheus and its Node Exporter as microservices, exposing performance data to Grafana Cloud for visualization. Created a basic dashboard displaying FIX message encoder latency metrics. Decided to run benchmark scripts locally on commits to ensure consistency, avoiding potential variability introduced by GitHub Actions server load. Additionally, improved logging structure by separating CSV files for internal analysis and Prometheus logs for external visualization. Organized project scripts into a dedicated `scripts` folder. Implemented a cron job to rotate benchmark logs every minute for efficient log management.
+Refactored the benchmarking framework to support additional benchmarks by introducing a `Formatter` class and using a consistent `BenchmarkLogger` implementation that inherits from `benchmark::BenchmarkReporter`. Adjusted the structure to accommodate multiple benchmark fixtures, requiring separate main functions and executables. Expanded benchmarking and testing coverage to include `LFQueue`. Additionally, corrected a networking issue to ensure successful client-server connections within the Docker network.
 
 Changes:
-- Deployed Prometheus and Node Exporter as microservices for performance monitoring.
-- Integrated Prometheus with Grafana Cloud to visualize FIX message encoder latency metrics.
-- Created an initial Grafana dashboard for real-time performance tracking.
-- Chose to run benchmark scripts locally on commits to maintain consistency.
-- Added separate logs for CSV (internal analysis) and Prometheus (external visualization).
-- Organized project-related scripts into a dedicated `scripts/` directory.
-- Implemented a cron job to rotate benchmark logs every minute.
-- Exposed Grafana dashboard publicly and updated readme to include the link
+- Refactored benchmarking framework by introducing a `Formatter` class and maintaining a unified `BenchmarkLogger` structure.
+- Separated benchmark fixtures into distinct main functions and executables.
+- Removed Prometheus metric filtering to allow full data collection.
+- Added benchmarks for `LFQueue` performance analysis.
+- Implemented tests to validate `LFQueue` correctness.
+- Fixed Docker networking issue to enable proper client-server communication.
+- Fixed a bug in NetworkHandler's Start() function to make sure socket is added to vector of sockets for reuse.
 
 Next steps:
-- Expand Grafana dashboard with additional performance metrics and visualizations.
-- Optimize Prometheus data collection for lower-latency reporting.
-- Investigate additional benchmark optimizations for FIX message encoding.
+- Add `LFQueue` benchmark visualization to Grafana.
+- Integrate `LFQueue` into the application for efficient inter-thread communication.
+- Refactor the memory pool to use thread-local storage for better performance.
+- Connect message passing to `LFQueue` to accelerate communication between application threads and network managers.
 
 Authored and reviewed by: Nigel Saurino

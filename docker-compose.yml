@@ -52,7 +52,7 @@ networks:
   monitoring:
     driver: bridge
   FIXNET:
-    driver: bridge
+    external: true 
 
 # volumes:
 #  prometheus_data:

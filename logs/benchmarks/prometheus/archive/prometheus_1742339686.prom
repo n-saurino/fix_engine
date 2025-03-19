@@ -1,0 +1,152 @@
+# HELP lfqueue_push_mean_ns Average push operation time in nanoseconds.
+# TYPE lfqueue_push_mean_ns gauge
+lfqueue_push_mean_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1378.96
+
+# HELP lfqueue_push_median_ns Median push operation time in nanoseconds.
+# TYPE lfqueue_push_median_ns gauge
+lfqueue_push_median_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1372.9
+
+# HELP lfqueue_push_std_dev_ns Standard deviation of push operation time in nanoseconds.
+# TYPE lfqueue_push_std_dev_ns gauge
+lfqueue_push_std_dev_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 20.3741
+
+# HELP lfqueue_push_min_ns Minimum push operation time in nanoseconds.
+# TYPE lfqueue_push_min_ns gauge
+lfqueue_push_min_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1351.37
+
+# HELP lfqueue_push_max_ns Maximum push operation time in nanoseconds.
+# TYPE lfqueue_push_max_ns gauge
+lfqueue_push_max_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1413.28
+
+# HELP lfqueue_pop_mean_ns Average pop operation time in nanoseconds.
+# TYPE lfqueue_pop_mean_ns gauge
+lfqueue_pop_mean_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1364.18
+
+# HELP lfqueue_pop_median_ns Median pop operation time in nanoseconds.
+# TYPE lfqueue_pop_median_ns gauge
+lfqueue_pop_median_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1356.04
+
+# HELP lfqueue_pop_std_dev_ns Standard deviation of pop operation time in nanoseconds.
+# TYPE lfqueue_pop_std_dev_ns gauge
+lfqueue_pop_std_dev_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 17.8692
+
+# HELP lfqueue_pop_min_ns Minimum pop operation time in nanoseconds.
+# TYPE lfqueue_pop_min_ns gauge
+lfqueue_pop_min_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1352.14
+
+# HELP lfqueue_pop_max_ns Maximum pop operation time in nanoseconds.
+# TYPE lfqueue_pop_max_ns gauge
+lfqueue_pop_max_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1399.76
+
+# HELP lfqueue_iterations Number of push/pop measurements collected.
+# TYPE lfqueue_iterations gauge
+lfqueue_iterations{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 10
+
+# HELP lfqueue_push_mean_ns Average push operation time in nanoseconds.
+# TYPE lfqueue_push_mean_ns gauge
+lfqueue_push_mean_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.2316
+
+# HELP lfqueue_push_median_ns Median push operation time in nanoseconds.
+# TYPE lfqueue_push_median_ns gauge
+lfqueue_push_median_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.18134
+
+# HELP lfqueue_push_std_dev_ns Standard deviation of push operation time in nanoseconds.
+# TYPE lfqueue_push_std_dev_ns gauge
+lfqueue_push_std_dev_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0.16115
+
+# HELP lfqueue_push_min_ns Minimum push operation time in nanoseconds.
+# TYPE lfqueue_push_min_ns gauge
+lfqueue_push_min_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.0604
+
+# HELP lfqueue_push_max_ns Maximum push operation time in nanoseconds.
+# TYPE lfqueue_push_max_ns gauge
+lfqueue_push_max_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.53189
+
+# HELP lfqueue_pop_mean_ns Average pop operation time in nanoseconds.
+# TYPE lfqueue_pop_mean_ns gauge
+lfqueue_pop_mean_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.11754
+
+# HELP lfqueue_pop_median_ns Median pop operation time in nanoseconds.
+# TYPE lfqueue_pop_median_ns gauge
+lfqueue_pop_median_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.0417
+
+# HELP lfqueue_pop_std_dev_ns Standard deviation of pop operation time in nanoseconds.
+# TYPE lfqueue_pop_std_dev_ns gauge
+lfqueue_pop_std_dev_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0.159794
+
+# HELP lfqueue_pop_min_ns Minimum pop operation time in nanoseconds.
+# TYPE lfqueue_pop_min_ns gauge
+lfqueue_pop_min_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.00576
+
+# HELP lfqueue_pop_max_ns Maximum pop operation time in nanoseconds.
+# TYPE lfqueue_pop_max_ns gauge
+lfqueue_pop_max_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.42901
+
+# HELP lfqueue_iterations Number of push/pop measurements collected.
+# TYPE lfqueue_iterations gauge
+lfqueue_iterations{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 10
+
+# HELP fix_message_encoding_latency_mean_median_test result of mean-median test to check normal distribution.
+# TYPE fix_message_encoding_latency_mean_median_test gauge
+fix_message_encoding_latency_mean_median_test{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 0.00623379
+
+# HELP fix_message_encoding_latency_normal_distribution 1 if normally distributed.
+# TYPE fix_message_encoding_latency_normal_distribution gauge
+fix_message_encoding_latency_is_normal{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1
+
+# HELP fix_message_encoding_latency_mean_ns Mean time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_mean_ns gauge
+fix_message_encoding_latency_mean_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1424.02
+
+# HELP fix_message_encoding_latency_median_ns Median time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_median_ns gauge
+fix_message_encoding_latency_median_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1415.14
+
+# HELP fix_message_encoding_latency_std_dev_ns Std. dev of time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_std_dev_ns gauge
+fix_message_encoding_latency_std_dev_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 27.6473
+
+# HELP fix_message_encoding_latency_min_ns Min time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_min_ns gauge
+fix_message_encoding_latency_min_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1388.65
+
+# HELP fix_message_encoding_latency_max_ns Max time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_max_ns gauge
+fix_message_encoding_latency_max_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1473.66
+
+# HELP fix_message_encoding_latency_runs Number of benchmarks runs composing this result.
+# TYPE fix_message_encoding_latency_run gauge
+fix_message_encoding_iterations{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 10
+
+# HELP fix_message_encoding_latency_mean_median_test result of mean-median test to check normal distribution.
+# TYPE fix_message_encoding_latency_mean_median_test gauge
+fix_message_encoding_latency_mean_median_test{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0.00130198
+
+# HELP fix_message_encoding_latency_normal_distribution 1 if normally distributed.
+# TYPE fix_message_encoding_latency_normal_distribution gauge
+fix_message_encoding_latency_is_normal{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 1
+
+# HELP fix_message_encoding_latency_mean_ns Mean time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_mean_ns gauge
+fix_message_encoding_latency_mean_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.10832
+
+# HELP fix_message_encoding_latency_median_ns Median time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_median_ns gauge
+fix_message_encoding_latency_median_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.10167
+
+# HELP fix_message_encoding_latency_std_dev_ns Std. dev of time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_std_dev_ns gauge
+fix_message_encoding_latency_std_dev_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0.0795111
+
+# HELP fix_message_encoding_latency_min_ns Min time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_min_ns gauge
+fix_message_encoding_latency_min_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.02096
+
+# HELP fix_message_encoding_latency_max_ns Max time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_max_ns gauge
+fix_message_encoding_latency_max_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.2404
+
+# HELP fix_message_encoding_latency_runs Number of benchmarks runs composing this result.
+# TYPE fix_message_encoding_latency_run gauge
+fix_message_encoding_iterations{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 10
+

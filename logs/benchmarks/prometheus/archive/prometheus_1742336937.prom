@@ -1,0 +1,64 @@
+# HELP fix_message_encoding_latency_mean_median_test result of mean-median test to check normal distribution.
+# TYPE fix_message_encoding_latency_mean_median_test gauge
+fix_message_encoding_latency_mean_median_test{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 0.000191814
+
+# HELP fix_message_encoding_latency_normal_distribution 1 if normally distributed.
+# TYPE fix_message_encoding_latency_normal_distribution gauge
+fix_message_encoding_latency_is_normal{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1
+
+# HELP fix_message_encoding_latency_mean_ns Mean time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_mean_ns gauge
+fix_message_encoding_latency_mean_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1420.66
+
+# HELP fix_message_encoding_latency_median_ns Median time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_median_ns gauge
+fix_message_encoding_latency_median_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1420.93
+
+# HELP fix_message_encoding_latency_std_dev_ns Std. dev of time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_std_dev_ns gauge
+fix_message_encoding_latency_std_dev_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 47.0642
+
+# HELP fix_message_encoding_latency_min_ns Min time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_min_ns gauge
+fix_message_encoding_latency_min_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1351.29
+
+# HELP fix_message_encoding_latency_max_ns Max time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_max_ns gauge
+fix_message_encoding_latency_max_ns{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 1492.97
+
+# HELP fix_message_encoding_latency_runs Number of benchmarks runs composing this result.
+# TYPE fix_message_encoding_latency_run gauge
+fix_message_encoding_iterations{benchmark="FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10"} 10
+
+# HELP fix_message_encoding_latency_mean_median_test result of mean-median test to check normal distribution.
+# TYPE fix_message_encoding_latency_mean_median_test gauge
+fix_message_encoding_latency_mean_median_test{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0.0133448
+
+# HELP fix_message_encoding_latency_normal_distribution 1 if normally distributed.
+# TYPE fix_message_encoding_latency_normal_distribution gauge
+fix_message_encoding_latency_is_normal{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0
+
+# HELP fix_message_encoding_latency_mean_ns Mean time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_mean_ns gauge
+fix_message_encoding_latency_mean_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.14434
+
+# HELP fix_message_encoding_latency_median_ns Median time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_median_ns gauge
+fix_message_encoding_latency_median_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.07569
+
+# HELP fix_message_encoding_latency_std_dev_ns Std. dev of time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_std_dev_ns gauge
+fix_message_encoding_latency_std_dev_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0.154387
+
+# HELP fix_message_encoding_latency_min_ns Min time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_min_ns gauge
+fix_message_encoding_latency_min_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.00357
+
+# HELP fix_message_encoding_latency_max_ns Max time taken to build a FIX message in nanoseconds.
+# TYPE fix_message_encoding_latency_max_ns gauge
+fix_message_encoding_latency_max_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 5.50754
+
+# HELP fix_message_encoding_latency_runs Number of benchmarks runs composing this result.
+# TYPE fix_message_encoding_latency_run gauge
+fix_message_encoding_iterations{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 10
+
