@@ -22,5 +22,5 @@ cmake --build "${BUILD_DIR}" -- -j$(nproc)
 # Run the benchmark executable.
 echo "Running benchmarks..."
 # "${BENCHMARK_EXEC}"
-# "${BUILD_DIR}/benchmarks/FIXEncoderBenchmark"
+"${BUILD_DIR}/benchmarks/FIXEncoderBenchmark"
 "${BUILD_DIR}/benchmarks/LFQueueBenchmark"

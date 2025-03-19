@@ -49,3 +49,8 @@ FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00623379,1,1424.02,14
 LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10,0.00130198,1,5.10832,5.10167,0.0795111,5.02096,5.2404,10,0
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00272367,1,1428.06,1424.17,30.2959,1391.1,1483.28,10,0
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00628473,1,1450.89,1460.06,44.7625,1376.42,1518.8,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00592893,1,1392.05,1383.8,39.505,1348.95,1501.99,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00785951,1,1470.33,1481.98,50.9056,1400.63,1543.3,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0329744,0,1578.8,1526.74,106.212,1471.56,1776.55,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0640266,0,1631.46,1527,209.258,1438.38,2044.22,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.021051,0,1483.29,1452.07,85.2415,1401.95,1639.47,10,0

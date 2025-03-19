@@ -1,15 +1,19 @@
-refactor(logging): Introduce Formatter class for flexible benchmark logging
+refactor(benchmarking): Extend framework for new benchmarks and LFQueue testing
 
-Refactored the `BenchmarkLogger` by introducing a `Formatter` class inheritance structure, enabling custom formatting for different benchmarks as needed. The logger now accepts a formatter that delegates logging logic to derived class implementations, simplifying the `BenchmarkLogger` and improving modularity.
+Refactored the benchmarking framework to support additional benchmarks by introducing a `Formatter` class and using a consistent `BenchmarkLogger` implementation that inherits from `benchmark::BenchmarkReporter`. Adjusted the structure to accommodate multiple benchmark fixtures, requiring separate main functions and executables. Expanded benchmarking and testing coverage to include `LFQueue`. Additionally, corrected a networking issue to ensure successful client-server connections within the Docker network.
 
 Changes:
-- Introduced a `Formatter` class hierarchy to allow custom benchmark log formatting.
-- Updated `BenchmarkLogger` to accept a formatter that calls derived class `Log` functions.
-- Simplified `BenchmarkLogger` by moving formatting logic into dedicated formatter classes.
+- Refactored benchmarking framework by introducing a `Formatter` class and maintaining a unified `BenchmarkLogger` structure.
+- Separated benchmark fixtures into distinct main functions and executables.
+- Removed Prometheus metric filtering to allow full data collection.
+- Added benchmarks for `LFQueue` performance analysis.
+- Implemented tests to validate `LFQueue` correctness.
+- Fixed Docker networking issue to enable proper client-server communication.
 
 Next steps:
-- Validate the refactor by running FIXMessageBuilder benchmarks.
-- Implement benchmarking for `LFQueue` performance.
-- Develop unit tests to validate `LFQueue` functionality.
+- Add `LFQueue` benchmark visualization to Grafana.
+- Integrate `LFQueue` into the application for efficient inter-thread communication.
+- Refactor the memory pool to use thread-local storage for better performance.
+- Connect message passing to `LFQueue` to accelerate communication between application threads and network managers.
 
 Authored and reviewed by: Nigel Saurino
