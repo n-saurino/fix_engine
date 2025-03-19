@@ -9,6 +9,7 @@ Changes:
 - Added benchmarks for `LFQueue` performance analysis.
 - Implemented tests to validate `LFQueue` correctness.
 - Fixed Docker networking issue to enable proper client-server communication.
+- Fixed a bug in NetworkHandler's Start() function to make sure socket is added to vector of sockets for reuse.
 
 Next steps:
 - Add `LFQueue` benchmark visualization to Grafana.

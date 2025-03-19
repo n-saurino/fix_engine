@@ -60,6 +60,8 @@ void FIXNetworkHandler::Start() {
     return;
   }
 
+  sockets_[socket_idx_++] = client_socket_fd;
+
   // test protocol
   // Test(latency_test, client_socket_fd);
   // Test(throughput_test, client_socket_fd);
