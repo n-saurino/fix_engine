@@ -8,7 +8,7 @@
             "program": "${workspaceFolder}/build/main", // Replace with your actual executable path
             "args": [], // Add any arguments your program needs
             "cwd": "${workspaceFolder}",
-            "stopOnEntry": false,
+            "stopOnEntry": true,
             "preLaunchTask": "CMake: build",
             "environment": [],
             "externalConsole": false,
@@ -26,4 +26,3 @@
         }
     ]
 }
-

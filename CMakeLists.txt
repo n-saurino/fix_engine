@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(main VERSION 0.1.0 LANGUAGES C CXX)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 20)  # Use C++20, you can change this to 11, 14, 20, etc.
 set(CMAKE_CXX_STANDARD_REQUIRED True)  # Ensure the compiler enforces the standard
@@ -44,7 +46,7 @@ add_library(sbe_generated INTERFACE)
 target_link_libraries(main PRIVATE ${Boost_LIBRARIES} GTest::GTest GTest::Main pthread sbe_generated)
 
 # Add this at the end of your CMakeLists.txt
-enable_testing()
-add_subdirectory(tests)
+# enable_testing()
+# add_subdirectory(tests)
 
-add_subdirectory(benchmarks)
+# add_subdirectory(benchmarks)
