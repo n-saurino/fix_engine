@@ -1,20 +1,15 @@
-refactor(benchmarking): Extend framework for new benchmarks and LFQueue testing
+refactor(memory): Redesign Memory Pool with SPSC queue paradigm and compile-time capacity
 
-Refactored the benchmarking framework to support additional benchmarks by introducing a `Formatter` class and using a consistent `BenchmarkLogger` implementation that inherits from `benchmark::BenchmarkReporter`. Adjusted the structure to accommodate multiple benchmark fixtures, requiring separate main functions and executables. Expanded benchmarking and testing coverage to include `LFQueue`. Additionally, corrected a networking issue to ensure successful client-server connections within the Docker network.
+Refactored the Memory Pool to align with the principles used in Charles Frasch's Single Producer Single Consumer (SPSC) queue. Introduced templating to define a compile-time capacity, enabling a stack-allocated free list for improved performance and memory efficiency. Reworked helper functions to utilize a stack-style free list, eliminating fragmentation issues present in the previous implementation.
 
 Changes:
-- Refactored benchmarking framework by introducing a `Formatter` class and maintaining a unified `BenchmarkLogger` structure.
-- Separated benchmark fixtures into distinct main functions and executables.
-- Removed Prometheus metric filtering to allow full data collection.
-- Added benchmarks for `LFQueue` performance analysis.
-- Implemented tests to validate `LFQueue` correctness.
-- Fixed Docker networking issue to enable proper client-server communication.
-- Fixed a bug in NetworkHandler's Start() function to make sure socket is added to vector of sockets for reuse.
+- Refactored the Memory Pool using paradigms from Charles Frasch’s SPSC queue.
+- Templated the Memory Pool and introduced a compile-time capacity for stack allocation.
+- Reworked helper functions to implement a stack-based free list, replacing the previous fragmented array-based approach.
 
 Next steps:
-- Add `LFQueue` benchmark visualization to Grafana.
-- Integrate `LFQueue` into the application for efficient inter-thread communication.
-- Refactor the memory pool to use thread-local storage for better performance.
-- Connect message passing to `LFQueue` to accelerate communication between application threads and network managers.
+- Add thread-local support for the Memory Pool to optimize memory management.
+- Integrate an LFQueue to pass FIX message buffer pointers from the application's thread-local memory pool to the TX Network Handler thread.
+- Integrate an LFQueue to return FIX message buffer pointers from the TX Network Handler thread for deallocation in the application’s thread-local memory pool.
 
 Authored and reviewed by: Nigel Saurino

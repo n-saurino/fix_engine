@@ -1,13 +1,9 @@
 Changes:
-- Refactored Benchmarking Framework to support new Benchmarks by introducing a formatter class and using the same derived BenchmarkLogger that inherits from the benchmark::BenchmarkReporter class
-- Had to break out separate main functions and executables for each benchmark Fixture
-- Removed filtering on prometheus metrics
-- Added Benchmarks for the LFQueue
-- Added Tests for the LFQueue
-- Corrected an issue with the docker Network so that the client and server could connect
+- Refactored the Memory Pool to incorporate the paradigm's used in Charles Frasch's SPSC Queue
+- Templated the Memory Pool and added a compile-time capacity so that the free list can be a stack-allocated array
+- Reworked the helper functions to reflect a stack-style free list instead of the array I had before that dealt with fragmentation
 
 Next Steps:
-- Add LFQueue Benchmark visualization to Grafana
-- Integrate LFQueue in application
-- Refactor Memory Pool and make it thread local
-- Integrate Messages with LFQueue for fast communication between threads running the application and the network managers
+- Make sure I add thread-local support for memory pool
+- Integrate a LFQueue for passing FIX message buffer pointers from application's thread-local memory pool to TX Network Handler thread.
+- Integrate a LFQueue for returning the FIX message buffer pointers from the TX Network Handler thread that need to be deallocated in the application thread's thread-local memory pool

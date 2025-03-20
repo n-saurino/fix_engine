@@ -50,17 +50,18 @@ class MemoryPool : private Alloc {
   //   MemoryPool& operator=(const MemoryPool&) = delete;
   //   MemoryPool& operator=(MemoryPool&&) = delete;
 
-  T* Allocate() {
+  inline T* Allocate() {
     ASSERT(
         !Full(),
         "Memory pool out of space! Allocation of new memory block failed...\n");
 
     // return memory address of T block
-    size_t pool_idx = free_list_[curr_idx_--];
+    size_t pool_idx = free_list_[curr_idx_];
+    --curr_idx_;
     return &pool_[pool_idx];
   }
 
-  bool Free(const T* buffer_ptr) {
+  inline bool Free(const T* buffer_ptr) {
     ASSERT(buffer_ptr, "Nullptr passed to Free()...");
 
     // intentionally ignoring ptr alignment with block size for speed
@@ -72,7 +73,8 @@ class MemoryPool : private Alloc {
 
     ASSERT(!Empty(), "Trying to Free() an empty Memory Pool...");
 
-    free_list_[curr_idx_++] = idx;
+    ++curr_idx_;
+    free_list_[curr_idx_] = idx;
 
     return true;
   }
