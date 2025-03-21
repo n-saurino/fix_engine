@@ -11,7 +11,9 @@
 
 class FIXMessageBenchmark : public benchmark::Fixture {
  protected:
-  MemoryPool pool;
+  using CharBuffer = char[512];
+  static constexpr size_t kNumBlocks{1024};
+  MemoryPool<CharBuffer, kNumBlocks> pool;
   SampleNewOrder order;
 
  public:
@@ -30,14 +32,15 @@ class FIXMessageBenchmark : public benchmark::Fixture {
 BENCHMARK_F(FIXMessageBenchmark, Benchmark_FIXMessageBuild)
 (benchmark::State& state) {
   for (auto _ : state) {
-    FIXBuffer buffer(pool.Allocate());  // Simulate real allocation on hot path
+    CharBuffer* buffer_ptr{pool.Allocate()};
+    FIXBuffer buffer(*buffer_ptr);  // Simulate real allocation on hot path
     FIXNewOrderSingle new_order_single(buffer, order);
     new_order_single.Serialize();
     benchmark::DoNotOptimize(buffer.Data());  // Prevent compiler optimizations
     // ClobberMemory() adds ~3ns of overhead but forces the compiler to
     // write to memory instead of the compiler optimizing it away
     benchmark::ClobberMemory();
-    pool.Free(buffer.Data());  // Return buffer to the pool for reuse
+    pool.Free(buffer_ptr);  // Return buffer to the pool for reuse
   }
 }
 

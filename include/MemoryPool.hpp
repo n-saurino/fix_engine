@@ -80,7 +80,7 @@ class MemoryPool : private Alloc {
   }
 
   auto Empty() -> const bool { return curr_idx_ == kTotalBlocks - 1; };
-  auto Full() -> const bool { return curr_idx_ == 0; }
+  auto Full() -> const bool { return curr_idx_ < 0; }
   auto Size() -> const size_t { return kTotalBlocks; }
   void Reset() {
     for (int i{}; i < kTotalBlocks; ++i) {
@@ -95,5 +95,5 @@ class MemoryPool : private Alloc {
   size_t kMemPoolCapacity{};
   T* pool_;
   SizeType free_list_[Capacity];
-  SizeType curr_idx_{};
+  int curr_idx_{};
 };

@@ -46,7 +46,7 @@ add_library(sbe_generated INTERFACE)
 target_link_libraries(main PRIVATE ${Boost_LIBRARIES} GTest::GTest GTest::Main pthread sbe_generated)
 
 # Add this at the end of your CMakeLists.txt
-# enable_testing()
-# add_subdirectory(tests)
+enable_testing()
+add_subdirectory(tests)
 
-# add_subdirectory(benchmarks)
+add_subdirectory(benchmarks)

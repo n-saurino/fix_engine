@@ -12,11 +12,19 @@ int main(int argc, char** argv) {
   // client_thread.join();
 
   using CharBuffer = char[512];
-  constexpr size_t kNumberBlocks{1024};
+  constexpr size_t kNumberBlocks{4};
   MemoryPool<CharBuffer, kNumberBlocks> pool{};
-  for (int i{}; i < 10000; ++i) {
-    CharBuffer* ptr = pool.Allocate();
-    pool.Free(ptr);
+  std::vector<CharBuffer*> blocks(pool.Size());
+
+  for (size_t i = 0; i < pool.Size(); ++i) {
+    blocks[i] = pool.Allocate();
+    ASSERT(blocks[i] != nullptr, "Pointer from Allocate() is a nullptr");
+  }
+
+  // Ensure blocks are unique
+  for (size_t i = 1; i < pool.Size(); ++i) {
+    ASSERT(blocks[i] != blocks[i - 1],
+           "Pointer to blocks from Allocate are not unique");
   }
 
   // build FIX message buffer
