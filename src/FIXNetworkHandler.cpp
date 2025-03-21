@@ -43,7 +43,7 @@ void FIXNetworkHandler::Start() {
   client_socket_address.sin_family = AF_INET;
   client_socket_address.sin_port = htons(PORT_NUM);
 
-  inet_pton(AF_INET, "172.18.0.2", &client_socket_address.sin_addr);
+  inet_pton(AF_INET, "172.18.0.3", &client_socket_address.sin_addr);
 
   int connect_result{};
 

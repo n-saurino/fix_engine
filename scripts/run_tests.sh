@@ -5,7 +5,7 @@ mkdir -p /workspace/build
 cd /workspace/build
 
 # Run CMake to configure the project
-cmake ..
+cmake .. -DCMAKE_BUILD_TYPE=Debug
 
 # Build the project
 cmake --build . --clean-first

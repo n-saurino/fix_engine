@@ -1,9 +1,10 @@
 Changes:
-- Updated the testing framework for the new templated MemoryPool
-- MemoryPool passed full suite of tests.
+- Updated all tests to incoporate new MemoryPool api
+- Microbenchmarked the MemoryPool against the std::allocator and old memory pool implementation.
+- New MemoryPool implementation ~1.4x faster than old memory pool implementation, ~9x faster than std::allocator.
 
 Next Steps:
 - Look at options for FIXBuffer buffer pointer. Right now, it is a char* but that creates issues when I need to pass a char* back from FIXBuffer to MemoryPool.Free(). I think this may get taken care of when I refactor my FIXMessage Framework. 
-- Make sure I add thread-local support for memory pool
+- Make sure I add thread-local support for memory pool 
 - Integrate a LFQueue for passing FIX message buffer pointers from application's thread-local memory pool to TX Network Handler thread.
 - Integrate a LFQueue for returning the FIX message buffer pointers from the TX Network Handler thread that need to be deallocated in the application thread's thread-local memory pool

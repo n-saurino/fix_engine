@@ -13,7 +13,9 @@ class FIXMessageTest : public ::testing::Test {
   SampleNewOrder orig_order_;
   SampleCancelOrder cancel_order_;
   SampleCancelReplaceOrder cancel_replace_order_;
-  MemoryPool pool_;
+  using CharBuffer = char[512];
+  static constexpr size_t kNumBlocks{1024};
+  MemoryPool<CharBuffer, kNumBlocks> pool_;
 
   void SetUp() override {
     // Setup code here, e.g., initialize network handler
@@ -36,16 +38,18 @@ class FIXMessageTest : public ::testing::Test {
 TEST_F(FIXMessageTest, TestNewOrderSingle) {
   // --- Step 1: Logon ---
   FIXMessageBase::seq_num_generator_ = 1;
-  FIXBuffer logon_buffer(pool_.Allocate());
+  CharBuffer* cb_ptr{pool_.Allocate()};
+  FIXBuffer logon_buffer(*cb_ptr);
   FIXLogon logon(logon_buffer);
   logon.Serialize();
   std::string logonResponse = SendMessageAndGetResponse(logon_buffer);
   std::cerr << "Logon Response: " << logonResponse << "\n";
   ASSERT_GE(logonResponse.size(), 1);
-  pool_.Free(logon_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 2: New Order Single ---
-  FIXBuffer new_order_single_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer new_order_single_buffer(*cb_ptr);
   SampleNewOrder sample_new_order;
 
   FIXNewOrderSingle newOrder(new_order_single_buffer, sample_new_order);
@@ -54,112 +58,123 @@ TEST_F(FIXMessageTest, TestNewOrderSingle) {
       SendMessageAndGetResponse(new_order_single_buffer);
   std::cerr << "NewOrderSingle Response: " << newOrderResponse << "\n";
   ASSERT_GE(newOrderResponse.size(), 1);
-  pool_.Free(new_order_single_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 3: Logout ---
-  FIXBuffer logout_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer logout_buffer(*cb_ptr);
   FIXLogout logout(logout_buffer);
   logout.Serialize();
   std::string logoutResponse = SendMessageAndGetResponse(logout_buffer);
   std::cerr << "Logout Response: " << logoutResponse << "\n";
   ASSERT_GE(logoutResponse.size(), 1);
-  pool_.Free(logout_buffer.Data());
+  pool_.Free(cb_ptr);
 }
 
 TEST_F(FIXMessageTest, TestHeartbeat) {
   // --- Step 1: Logon ---
   FIXMessageBase::seq_num_generator_ = 1;
-  FIXBuffer logon_buffer(pool_.Allocate());
+  CharBuffer* cb_ptr{pool_.Allocate()};
+  FIXBuffer logon_buffer(*cb_ptr);
   FIXLogon logon(logon_buffer);
   logon.Serialize();
   std::string logonResponse = SendMessageAndGetResponse(logon_buffer);
   std::cerr << "Logon Response: " << logonResponse << "\n";
   ASSERT_GE(logonResponse.size(), 1);
-  pool_.Free(logon_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 2: Heartbeat ---
-  FIXBuffer heartbeat_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer heartbeat_buffer(*cb_ptr);
   FIXHeartbeat heartbeat(heartbeat_buffer);
   heartbeat.Serialize();
   std::string heartbeatResponse = SendMessageAndGetResponse(heartbeat_buffer);
   std::cerr << "Heartbeat Response: " << heartbeatResponse << "\n";
   ASSERT_GE(heartbeatResponse.size(), 1);
-  pool_.Free(heartbeat_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 3: Logout ---
-  FIXBuffer logout_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer logout_buffer(*cb_ptr);
   FIXLogout logout(logout_buffer);
   logout.Serialize();
   std::string logoutResponse = SendMessageAndGetResponse(logout_buffer);
   std::cerr << "Logout Response: " << logoutResponse << "\n";
   ASSERT_GE(logoutResponse.size(), 1);
-  pool_.Free(logout_buffer.Data());
+  pool_.Free(cb_ptr);
 }
 
 TEST_F(FIXMessageTest, TestOrderCancelRequest) {
   // --- Step 1: Logon ---
   FIXMessageBase::seq_num_generator_ = 1;
-  FIXBuffer logon_buffer(pool_.Allocate());
+  CharBuffer* cb_ptr{pool_.Allocate()};
+  FIXBuffer logon_buffer(*cb_ptr);
   FIXLogon logon(logon_buffer);
   logon.Serialize();
   std::string logonResponse = SendMessageAndGetResponse(logon_buffer);
   std::cerr << "Logon Response: " << logonResponse << "\n";
   ASSERT_GE(logonResponse.size(), 1);
-  pool_.Free(logon_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 2: New Order Single ---
-  FIXBuffer new_order_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer new_order_buffer(*cb_ptr);
   SampleNewOrder sample_new_order{};
   FIXNewOrderSingle newOrder(new_order_buffer, sample_new_order);
   newOrder.Serialize();
   std::string newOrderResponse = SendMessageAndGetResponse(new_order_buffer);
   std::cerr << "NewOrderSingle Response: " << newOrderResponse << "\n";
   ASSERT_GE(newOrderResponse.size(), 1);
-  pool_.Free(new_order_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 3: Order Cancel Request ---
-  FIXBuffer cancel_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer cancel_buffer(*cb_ptr);
   SampleCancelOrder sample_cancel_order{};
   FIXOrderCancelRequest cancelRequest(cancel_buffer, sample_cancel_order);
   cancelRequest.Serialize();
   std::string cancelRequestResponse = SendMessageAndGetResponse(cancel_buffer);
   std::cerr << "OrderCancelRequest Response: " << cancelRequestResponse << "\n";
   ASSERT_GE(cancelRequestResponse.size(), 1);
-  pool_.Free(cancel_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 4: Logout ---
-  FIXBuffer logout_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer logout_buffer(*cb_ptr);
   FIXLogout logout(logout_buffer);
   logout.Serialize();
   std::string logoutResponse = SendMessageAndGetResponse(logout_buffer);
   std::cerr << "Logout Response: " << logoutResponse << "\n";
   ASSERT_GE(logoutResponse.size(), 1);
-  pool_.Free(logout_buffer.Data());
+  pool_.Free(cb_ptr);
 }
 
 TEST_F(FIXMessageTest, TestOrderCancelReplaceRequest) {
   // --- Step 1: Logon ---
   FIXMessageBase::seq_num_generator_ = 1;
-  FIXBuffer logon_buffer(pool_.Allocate());
+  CharBuffer* cb_ptr{pool_.Allocate()};
+  FIXBuffer logon_buffer(*cb_ptr);
   FIXLogon logon(logon_buffer);
   logon.Serialize();
   std::string logonResponse = SendMessageAndGetResponse(logon_buffer);
   std::cerr << "Logon Response: " << logonResponse << "\n";
   ASSERT_GE(logonResponse.size(), 1);
-  pool_.Free(logon_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 2: New Order Single ---
-  FIXBuffer new_order_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer new_order_buffer(*cb_ptr);
   SampleNewOrder sample_new_order{};
   FIXNewOrderSingle newOrder(new_order_buffer, sample_new_order);
   newOrder.Serialize();
   std::string newOrderResponse = SendMessageAndGetResponse(new_order_buffer);
   std::cerr << "NewOrderSingle Response: " << newOrderResponse << "\n";
   ASSERT_GE(newOrderResponse.size(), 1);
-  pool_.Free(new_order_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 3: Order Cancel Replace Request ---
-  FIXBuffer replace_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer replace_buffer(*cb_ptr);
   SampleCancelReplaceOrder sample_cancel_replace_order{};
   FIXOrderCancelReplaceRequest replaceRequest(replace_buffer,
                                               sample_cancel_replace_order);
@@ -169,45 +184,49 @@ TEST_F(FIXMessageTest, TestOrderCancelReplaceRequest) {
   std::cerr << "OrderCancelReplaceRequest Response: " << replaceRequestResponse
             << "\n";
   ASSERT_GE(replaceRequestResponse.size(), 1);
-  pool_.Free(replace_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 4: Logout ---
-  FIXBuffer logout_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer logout_buffer(*cb_ptr);
   FIXLogout logout(logout_buffer);
   logout.Serialize();
   std::string logoutResponse = SendMessageAndGetResponse(logout_buffer);
   std::cerr << "Logout Response: " << logoutResponse << "\n";
   ASSERT_GE(logoutResponse.size(), 1);
-  pool_.Free(logout_buffer.Data());
+  pool_.Free(cb_ptr);
 }
 
 TEST_F(FIXMessageTest, TestTestRequest) {
   // --- Step 1: Logon ---
   FIXMessageBase::seq_num_generator_ = 1;
-  FIXBuffer logon_buffer(pool_.Allocate());
+  CharBuffer* cb_ptr{pool_.Allocate()};
+  FIXBuffer logon_buffer(*cb_ptr);
   FIXLogon logon(logon_buffer);
   logon.Serialize();
   std::string logonResponse = SendMessageAndGetResponse(logon_buffer);
   std::cerr << "Logon Response: " << logonResponse << "\n";
   ASSERT_GE(logonResponse.size(), 1);
-  pool_.Free(logon_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 2: Test Request ---
-  FIXBuffer test_request_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer test_request_buffer(*cb_ptr);
   FIXTestRequest testRequest(test_request_buffer);
   testRequest.Serialize();
   std::string testRequestResponse =
       SendMessageAndGetResponse(test_request_buffer);
   std::cerr << "TestRequest Response: " << testRequestResponse << "\n";
   ASSERT_GE(testRequestResponse.size(), 1);
-  pool_.Free(test_request_buffer.Data());
+  pool_.Free(cb_ptr);
 
   // --- Step 3: Logout ---
-  FIXBuffer logout_buffer(pool_.Allocate());
+  cb_ptr = pool_.Allocate();
+  FIXBuffer logout_buffer(*cb_ptr);
   FIXLogout logout(logout_buffer);
   logout.Serialize();
   std::string logoutResponse = SendMessageAndGetResponse(logout_buffer);
   std::cerr << "Logout Response: " << logoutResponse << "\n";
   ASSERT_GE(logoutResponse.size(), 1);
-  pool_.Free(logout_buffer.Data());
+  pool_.Free(cb_ptr);
 }

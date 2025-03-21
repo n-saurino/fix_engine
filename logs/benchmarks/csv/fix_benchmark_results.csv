@@ -64,3 +64,5 @@ FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0116991,0,2400.57,237
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0319941,0,1552.64,1502.97,102.899,1452.02,1773.9,10,0
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0402983,0,1567.62,1504.45,154.518,1476.74,2003.64,10,0
 FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0147099,0,1598.54,1575.03,91.1648,1501.84,1833.45,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.0195036,0,1436.77,1408.75,85.9439,1357.5,1657.62,10,0
+FIXMessageBenchmark/Benchmark_FIXMessageBuild/repeats:10,0.00279448,1,1363.09,1359.28,40.5944,1310.43,1442.29,10,0

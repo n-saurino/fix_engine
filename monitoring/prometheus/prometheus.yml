@@ -10,19 +10,18 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets: ["node_exporter:9100"]
-
-#    metric_relabel_configs:
-#      - source_labels: [__name__]
-#        regex: "fix_.*"
-#        action: keep
-
-#  - job_name: "textfile_collector"
-#    metrics_path: /metrics
-#    static_configs:
-#      - targets: ["node_exporter:9100"]
+    # Only keep metrics starting with "fix" or "lfqueue"
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: '^(fix|lfqueue).*'
+        action: keep
 
 remote_write:
 - url: https://prometheus-prod-56-prod-us-east-2.grafana.net/api/prom/push
   basic_auth:
     username: 2313173 
     password_file: /etc/prometheus/password.txt
+    write_relabel_configs:
+      - source_labels: [__name__]
+        regex: '^(fix|lfqueue).*'
+        action: keep
