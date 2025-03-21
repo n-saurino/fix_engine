@@ -1,9 +1,9 @@
 Changes:
-- Refactored the Memory Pool to incorporate the paradigm's used in Charles Frasch's SPSC Queue
-- Templated the Memory Pool and added a compile-time capacity so that the free list can be a stack-allocated array
-- Reworked the helper functions to reflect a stack-style free list instead of the array I had before that dealt with fragmentation
+- Updated the testing framework for the new templated MemoryPool
+- MemoryPool passed full suite of tests.
 
 Next Steps:
+- Look at options for FIXBuffer buffer pointer. Right now, it is a char* but that creates issues when I need to pass a char* back from FIXBuffer to MemoryPool.Free(). I think this may get taken care of when I refactor my FIXMessage Framework. 
 - Make sure I add thread-local support for memory pool
 - Integrate a LFQueue for passing FIX message buffer pointers from application's thread-local memory pool to TX Network Handler thread.
 - Integrate a LFQueue for returning the FIX message buffer pointers from the TX Network Handler thread that need to be deallocated in the application thread's thread-local memory pool

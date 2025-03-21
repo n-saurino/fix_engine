@@ -1,15 +1,15 @@
-refactor(memory): Redesign Memory Pool with SPSC queue paradigm and compile-time capacity
+test(memory): Add tests for templated MemoryPool and validate correctness
 
-Refactored the Memory Pool to align with the principles used in Charles Frasch's Single Producer Single Consumer (SPSC) queue. Introduced templating to define a compile-time capacity, enabling a stack-allocated free list for improved performance and memory efficiency. Reworked helper functions to utilize a stack-style free list, eliminating fragmentation issues present in the previous implementation.
+Updated the testing framework to support the newly templated `MemoryPool` implementation. The refactored `MemoryPool` passed the full suite of unit tests, confirming the correctness of the stack-based free list and compile-time capacity design introduced in the previous commit.
 
 Changes:
-- Refactored the Memory Pool using paradigms from Charles Frasch’s SPSC queue.
-- Templated the Memory Pool and introduced a compile-time capacity for stack allocation.
-- Reworked helper functions to implement a stack-based free list, replacing the previous fragmented array-based approach.
+- Updated the test framework to support the templated `MemoryPool`.
+- Confirmed that `MemoryPool` passes the full suite of validation tests.
 
 Next steps:
-- Add thread-local support for the Memory Pool to optimize memory management.
-- Integrate an LFQueue to pass FIX message buffer pointers from the application's thread-local memory pool to the TX Network Handler thread.
-- Integrate an LFQueue to return FIX message buffer pointers from the TX Network Handler thread for deallocation in the application’s thread-local memory pool.
+- Evaluate design alternatives for `FIXBuffer`'s internal buffer pointer. Current use of `char*` complicates deallocation through `MemoryPool::Free()`; this may be addressed in the upcoming FIXMessage framework refactor.
+- Add thread-local support for the `MemoryPool` to isolate allocations by thread.
+- Integrate an `LFQueue` to pass FIX message buffer pointers from the application's thread-local memory pool to the TX Network Handler thread.
+- Integrate a second `LFQueue` to return deallocation-bound FIX message buffer pointers from the TX Network Handler thread to the application thread.
 
 Authored and reviewed by: Nigel Saurino
