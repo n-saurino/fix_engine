@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 project(main VERSION 0.1.0 LANGUAGES C CXX)
 
-set(CMAKE_BUILD_TYPE Debug)
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Debug)
+endif()
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 20)  # Use C++20, you can change this to 11, 14, 20, etc.

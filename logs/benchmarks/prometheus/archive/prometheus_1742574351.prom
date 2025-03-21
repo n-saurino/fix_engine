@@ -1,0 +1,44 @@
+# HELP lfqueue_push_mean_ns Average push operation time in nanoseconds.
+# TYPE lfqueue_push_mean_ns gauge
+lfqueue_push_mean_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 15.13
+
+# HELP lfqueue_push_median_ns Median push operation time in nanoseconds.
+# TYPE lfqueue_push_median_ns gauge
+lfqueue_push_median_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 14.9875
+
+# HELP lfqueue_push_std_dev_ns Standard deviation of push operation time in nanoseconds.
+# TYPE lfqueue_push_std_dev_ns gauge
+lfqueue_push_std_dev_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0.296847
+
+# HELP lfqueue_push_min_ns Minimum push operation time in nanoseconds.
+# TYPE lfqueue_push_min_ns gauge
+lfqueue_push_min_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 14.8337
+
+# HELP lfqueue_push_max_ns Maximum push operation time in nanoseconds.
+# TYPE lfqueue_push_max_ns gauge
+lfqueue_push_max_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 15.5648
+
+# HELP lfqueue_pop_mean_ns Average pop operation time in nanoseconds.
+# TYPE lfqueue_pop_mean_ns gauge
+lfqueue_pop_mean_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 15.4118
+
+# HELP lfqueue_pop_median_ns Median pop operation time in nanoseconds.
+# TYPE lfqueue_pop_median_ns gauge
+lfqueue_pop_median_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 14.901
+
+# HELP lfqueue_pop_std_dev_ns Standard deviation of pop operation time in nanoseconds.
+# TYPE lfqueue_pop_std_dev_ns gauge
+lfqueue_pop_std_dev_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 0.674409
+
+# HELP lfqueue_pop_min_ns Minimum pop operation time in nanoseconds.
+# TYPE lfqueue_pop_min_ns gauge
+lfqueue_pop_min_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 14.8054
+
+# HELP lfqueue_pop_max_ns Maximum pop operation time in nanoseconds.
+# TYPE lfqueue_pop_max_ns gauge
+lfqueue_pop_max_ns{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 16.3264
+
+# HELP lfqueue_iterations Number of push/pop measurements collected.
+# TYPE lfqueue_iterations gauge
+lfqueue_iterations{benchmark="LFQueueBenchmark/Benchmark_LFQueuePushPop/repeats:10"} 10
+
